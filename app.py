@@ -1,16 +1,18 @@
-from flask import Flask
+import hashlib
+
+from flask import Flask, jsonify
 import database
-import models
+from models import *
 
 app = Flask(__name__)
 
 # Create a database with the correct models.
+database.Base.metadata.create_all(database.postgres_engine)
 
 
 @app.route('/')
 def hello_world():
-  database.Base.metadata.create_all(database.postgres_engine)
-  return 'Hello World'
+  return jsonify()
 
 
 if __name__ == '__main__':
