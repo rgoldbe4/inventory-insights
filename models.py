@@ -48,6 +48,7 @@ class Item(database.Base):
   id = Column(Integer, primary_key=True)
   name = Column(String(50))
   price = Column(Float)
+  category = Column(String(50))
 
   cart_id = Column(Integer, ForeignKey('cart.id'))
   order_id = Column(Integer, ForeignKey('order.id'))
