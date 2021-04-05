@@ -1,9 +1,11 @@
+from flask.json import JSONEncoder
+
 import database
 from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship
 
 # Licensing per Admin
-class License(database.Base):
+class License(database.Base, JSONEncoder):
   __tablename__ = 'license'
 
   id = Column(Integer, primary_key=True)
@@ -12,7 +14,7 @@ class License(database.Base):
 
 
 # Customer who bought our product
-class Administrator(database.Base):
+class Administrator(database.Base, JSONEncoder):
   __tablename__ = 'administrator'
 
   id = Column(Integer, primary_key=True)
@@ -27,7 +29,7 @@ class Administrator(database.Base):
 
 
 # Person who uses an Administrator website
-class User(database.Base):
+class User(database.Base, JSONEncoder):
   __tablename__ = 'user'
 
   id = Column(Integer, primary_key=True)
@@ -42,16 +44,22 @@ class User(database.Base):
 
 
 # Item that the Administrator provides
-class Item(database.Base):
+class Item(database.Base, JSONEncoder):
   __tablename__ = 'item'
 
   id = Column(Integer, primary_key=True)
   name = Column(String(50))
   price = Column(Float)
 
+  # Relationships
   cart_id = Column(Integer, ForeignKey('cart.id'))
   order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
+
+  def default(self, obj):
+    if isinstance(obj, complex):
+      return [obj.real, obj.imag]
+    return JSONEncoder.default(self, obj)
 
 # A list of items desired by the User.
 # This may change. Look at "Order" if you want a finalized Cart.
@@ -64,6 +72,10 @@ class Cart(database.Base):
   items = relationship('Item')
   user_id = Column(Integer, ForeignKey('user.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
+  def default(self, obj):
+    if isinstance(obj, complex):
+      return [obj.real, obj.imag]
+    return JSONEncoder.default(self, obj)
 
 
 # A list of items purchased by the User.
