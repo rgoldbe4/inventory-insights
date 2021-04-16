@@ -20,10 +20,9 @@ export class AppComponent implements OnInit {
         'email': 'admin@buffsovernexus.com',
         'password': password
     };
-    console.log(password)
-    this.http.post('http://127.0.0.1:5000/account/create/', testData).toPromise().then(result => {
+    this.http.get('http://127.0.0.1:5000/').toPromise().then(result => {
       console.log(result);
-    })
+    });
   }
 
 }

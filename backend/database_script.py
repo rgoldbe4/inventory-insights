@@ -1,4 +1,4 @@
-from backend.helpers import user_helper, item_helper, cart_helper
+from backend.helpers import user_helper, item_helper, cart_helper, administrator_helper
 from pprint import pprint
 from backend.models import *
 from database import *
@@ -14,7 +14,7 @@ def testDatabase():
   # Test administrators
   # Administrators are required to have a License
   encrypted_password = hashlib.sha256("password".encode()).hexdigest()
-  admin = session.query(Administrator).filter_by(id=1).first()
+  admin = administrator_helper.get(session, 1)
 
   # Test User
   # Users can be created without a License
@@ -32,6 +32,7 @@ def testDatabase():
   items = [item, item_b]
   # Test Cart
   cart = cart_helper.get(session, 1)
+
 
   # Test Order
 

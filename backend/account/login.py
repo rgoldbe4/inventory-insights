@@ -8,8 +8,11 @@ from backend.helpers import user_helper, license_helper, cart_helper
 login_blueprint = Blueprint('login_blueprint', __name__)
 
 
-@login_blueprint.route('/account/')
+@login_blueprint.route('/account/login/', methods=['POST'])
 def index():
+  req = request.json
+  username = req['username']
+  password = req['password']
   return jsonify({'message': 'Hello World'})
 
 @login_blueprint.route('/account/create/', methods=['POST'])
@@ -23,13 +26,7 @@ def create():
   # Check if user exists
   session = Session()
   user = user_helper.get(session=session, email=email, password=password)
-  if user is None:
-    user = user_helper.add(session=session,
-                                first_name=first_name,
-                                last_name=last_name,
-                                email=email,
-                                password=password)
 
   cart = cart_helper.get(session, 1)
   session.close()
-  return cart
+  return jsonify({ 'user': user })

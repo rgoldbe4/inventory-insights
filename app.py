@@ -12,9 +12,6 @@ app.register_blueprint(login_blueprint)
 # Create a database with the correct models.
 Base.metadata.create_all(database.postgres_engine)
 
-script.testDatabase()
-
-
 @app.route('/')
 def hello_world():
   return jsonify(['Item A', 'Item B', 'Item C'])
