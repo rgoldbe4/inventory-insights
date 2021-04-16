@@ -5,16 +5,19 @@ from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean,
 from sqlalchemy.orm import relationship
 
 # Licensing per Admin
-class License(database.Base):
+class License(database.Base, SerializerMixin):
   __tablename__ = 'license'
 
   id = Column(Integer, primary_key=True)
   accounts = Column(Integer)
   administrators = relationship('Administrator', back_populates='license')
 
+  def default(self, o):
+    return o.__dict__
+
 
 # Customer who bought our product
-class Administrator(database.Base):
+class Administrator(database.Base, SerializerMixin):
   __tablename__ = 'administrator'
 
   id = Column(Integer, primary_key=True)
@@ -27,9 +30,12 @@ class Administrator(database.Base):
   license_id = Column(Integer, ForeignKey('license.id'))
   license = relationship('License', uselist=False, back_populates='administrators')
 
+  def default(self, o):
+    return o.__dict__
+
 
 # Person who uses an Administrator website
-class User(database.Base):
+class User(database.Base, SerializerMixin):
   __tablename__ = 'user'
 
   id = Column(Integer, primary_key=True)
@@ -41,6 +47,9 @@ class User(database.Base):
   # Relationships
   carts = relationship('Cart', back_populates='user')
   orders = relationship('Order', back_populates='user')
+
+  def default(self, o):
+    return o.__dict__
 
 
 # Item that the Administrator provides
@@ -62,7 +71,7 @@ class Item(database.Base, SerializerMixin):
 
   # A list of items desired by the User.
 # This may change. Look at "Order" if you want a finalized Cart.
-class Cart(database.Base):
+class Cart(database.Base, SerializerMixin):
   __tablename__ = 'cart'
 
   id = Column(Integer, primary_key=True)
@@ -72,9 +81,12 @@ class Cart(database.Base):
   user_id = Column(Integer, ForeignKey('user.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
 
+  def default(self, o):
+    return o.__dict__
+
 
 # A list of items purchased by the User.
-class Order(database.Base):
+class Order(database.Base, SerializerMixin):
   __tablename__ = 'order'
 
   id = Column(Integer, primary_key=True)
@@ -83,12 +95,18 @@ class Order(database.Base):
   user_id = Column(Integer, ForeignKey('user.id'))
   items = relationship('Item')
 
+  def default(self, o):
+    return o.__dict__
+
 
 # Shows what item, cart, and success of a Recommended item.
-class Recommendation(database.Base):
+class Recommendation(database.Base, SerializerMixin):
   __tablename__ = 'recommendation'
 
   id = Column(Integer, primary_key=True)
   cart = relationship('Cart', uselist=False)
   recommended = relationship('Item', uselist=False)
   success = Column(Boolean)
+
+  def default(self, o):
+    return o.__dict__

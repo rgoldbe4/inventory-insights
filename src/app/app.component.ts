@@ -14,9 +14,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     let password = shajs('sha256').update('password').digest('hex');
-    this.http.get('http://127.0.0.1:5000/').toPromise().then(result => {
-      console.log(result);
-    });
   }
 
 }

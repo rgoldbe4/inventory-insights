@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
 
     this.http.get('http://127.0.0.1:5000/items/all').toPromise().then(result => {
+      console.log(result['items']);
       this.items = result['items'];
     });
   }
