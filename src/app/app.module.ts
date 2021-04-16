@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { ShopComponent } from './shop/shop.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
     ItemComponent,
     AdminComponent,
     ShopComponent,
-    AdminNavComponent
+    AdminNavComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
     RouterModule.forRoot([
       { path: 'admin', component: AdminComponent },
       { path: 'shop', component: ShopComponent },
+      { path: 'admin/products', component: ProductsComponent }
     ]),
   ],
   providers: [],
