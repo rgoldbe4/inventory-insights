@@ -1,4 +1,4 @@
-from flask.json import JSONEncoder
+from sqlalchemy_serializer import SerializerMixin
 
 import database
 from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float
@@ -44,20 +44,23 @@ class User(database.Base):
 
 
 # Item that the Administrator provides
-class Item(database.Base):
+class Item(database.Base, SerializerMixin):
   __tablename__ = 'item'
 
   id = Column(Integer, primary_key=True)
   name = Column(String(50))
   price = Column(Float)
-  discontinued = Column(Boolean)
+  # discontinued = Column(Boolean)
 
   # Relationships
   cart_id = Column(Integer, ForeignKey('cart.id'))
   order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
 
-# A list of items desired by the User.
+  def default(self, o):
+    return o.__dict__
+
+  # A list of items desired by the User.
 # This may change. Look at "Order" if you want a finalized Cart.
 class Cart(database.Base):
   __tablename__ = 'cart'

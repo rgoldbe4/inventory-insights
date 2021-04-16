@@ -4,4 +4,30 @@
     <h2>Products</h2>
   </div>
 </div>
+<div class="row">
+  <div class="col">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#SKU</th>
+        <th scope="col">Description</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Price</th>
+        <th scope="col">More</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items">
+        <th>{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>Cost</td>
+        <td>{{ item.price }}</td>
+        <td><button type="button" class="btn btn-primary">More</button></td>
+      </tr>
+
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary btn-lg float-right">Add Product</button>
+  </div>
+</div>
 
