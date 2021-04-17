@@ -1,6 +1,6 @@
 <app-admin-nav></app-admin-nav>
-<h2>Product Name</h2>
-<form class="plr-5">
+<h2 class="text-center">Product Name</h2>
+<form class="px-5" method="post">
   <div class="input-group input-group-lg">
     <div class="input-group-prepend">
       <span class="input-group-text" id="itemNameSpan">Item Name: </span>
@@ -20,7 +20,9 @@
       <span class="input-group-text" id="stockSpan">Stock: </span>
     </div>
     <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="stock" name="stock">
-  </div>
+  </div><br>
+  <button type="button" class="btn btn-primary btn-lg float-right">Update/Add Item</button>
+  <p>If product exists then then this button is update Item, if there is no product then the button is add item</p>
 </form>
 
 
