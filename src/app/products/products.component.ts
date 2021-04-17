@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
       this.items = result['items'];
       this.numItems = result['items'].length;
       // Default from 0 to 10.
-      this.getDisplayedItems(0, 10);
+      this.getDisplayedItems(0, 1);
       // Maps from 0 to numPages (0 to 10 would be [0,1,2,3,...,10])
       this.pages = Array(Math.ceil(this.numItems / this.maxItems)).map((x, i)=>i);
     });
