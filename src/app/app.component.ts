@@ -1,5 +1,5 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as shajs from 'sha.js';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    let password = shajs('sha256').update('password').digest('hex');
+    let password = shajs('sha256').update('test').digest('hex');
   }
 
 }

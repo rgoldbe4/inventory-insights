@@ -34,15 +34,29 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  // This updates the pagination variables on the page any time it updates.
+  updatePagination(result: any) : void {
+    this.numItems = result['items'].length;
+    this.maxPages = Math.ceil(this.numItems / this.maxItems);
+    // Default from 0 to 10.
+    this.getDisplayedItems(this.currentPage, this.currentPage + 1);
+    // Maps from 0 to numPages (0 to 10 would be [0,1,2,3,...,10])
+    this.pages = Array(this.maxPages).map((x, i)=>i);
+  }
+
+  // Discontinue a product.
+  discontinue(id: number) : void {
+    let data = { id: id };
+    this.http.post('http://127.0.0.1:5000/items/discontinue', data).toPromise().then(result => {
+      this.items = result['items'];
+      this.updatePagination(result);
+    });
+  }
+
   ngOnInit(): void {
     this.http.get('http://127.0.0.1:5000/items/all').toPromise().then(result => {
       this.items = result['items'];
-      this.numItems = result['items'].length;
-      this.maxPages = Math.ceil(this.numItems / this.maxItems);
-      // Default from 0 to 10.
-      this.getDisplayedItems(this.currentPage, this.currentPage + 1);
-      // Maps from 0 to numPages (0 to 10 would be [0,1,2,3,...,10])
-      this.pages = Array(this.maxPages).map((x, i)=>i);
+      this.updatePagination(result);
     });
   }
 

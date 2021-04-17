@@ -27,3 +27,15 @@ def get_item():
   session.close()
   return jsonify({ 'item' : item })
 
+@item_blueprint.route('/items/discontinue', methods=['POST'])
+def discontinue():
+  data = request.json
+  item_id = data['id']
+  session = Session()
+  item = item_helper.get(session, item_id)
+  item.discontinued = True
+  session.commit()
+  session.close()
+  return get_all_items()
+
+

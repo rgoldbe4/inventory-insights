@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, abort, jsonify, request
 from flask.json import dumps
 
 from database import *
-from backend.helpers import user_helper, license_helper, cart_helper
+from backend.helpers import user_helper, license_helper, cart_helper, administrator_helper
 
 login_blueprint = Blueprint('login_blueprint', __name__)
 
@@ -13,6 +13,8 @@ def index():
   req = request.json
   username = req['username']
   password = req['password']
+  admin = administrator_helper.login(username, password)
+
   return jsonify({'message': 'Hello World'})
 
 @login_blueprint.route('/account/create/', methods=['POST'])

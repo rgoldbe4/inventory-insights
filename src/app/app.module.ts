@@ -15,6 +15,7 @@ import { ItemInfoComponent } from './item-info/item-info.component';
 import {FormsModule} from "@angular/forms";
 import { ItemAddComponent } from './item-add/item-add.component';
 import { CartComponent } from "./cart/cart.component";
+import { SplashComponent } from './splash/splash.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { CartComponent } from "./cart/cart.component";
     ProductsComponent,
     ItemInfoComponent,
     ItemAddComponent,
-    CartComponent
+    CartComponent,
+    SplashComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
+      {path: '', component: SplashComponent},
       {path: 'admin', component: AdminComponent},
       {path: 'shop', component: ShopComponent},
       {path: 'admin/products', component: ProductsComponent},

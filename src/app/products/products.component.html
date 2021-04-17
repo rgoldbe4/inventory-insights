@@ -25,19 +25,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of displayedItems">
+      <ng-container *ngFor="let item of displayedItems">
+        <tr *ngIf="!item.discontinued">
           <th>{{ item.id }}</th>
           <td>{{ item.name }}</td>
           <td>${{ item.cost }}</td>
           <td>${{ item.price }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Options">
-              <a class="btn btn-outline-primary" href="admin/products/item/info/{{item.id}}">View More</a>
+              <a class="btn btn-outline-primary" href="admin/products/item/info/{{item.id}}">Statistics</a>
               <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">Edit Item</a>
-              <a class="btn btn-outline-danger" href="admin/products/item/discontinue/{{item.id}}">Discontinue</a>
+              <button class="btn btn-outline-danger" (click)="discontinue(item.id)">Discontinue Item</button>
             </div>
           </td>
         </tr>
+      </ng-container>
+
       </tbody>
     </table>
 

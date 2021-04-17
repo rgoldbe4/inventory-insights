@@ -20,3 +20,6 @@ def delete(session, id):
     session.commit()
     return True
   return False
+
+def login(session, username, password):
+  return session.query(Administrator).filter_by(username=username, password=password).first()

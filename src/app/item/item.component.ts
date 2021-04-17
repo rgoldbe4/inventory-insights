@@ -16,14 +16,12 @@ export class ItemComponent implements OnInit {
   item: any = {};
 
   ngOnInit(): void {
-    /*
     this.route.params.subscribe( params => {
       this.id = params['id'];
       this.http.post('http://127.0.0.1:5000/items/item', { id: this.id }).toPromise().then(result => {
           this.item = result['item'];
       });
     })
-     */
   }
 
 }
