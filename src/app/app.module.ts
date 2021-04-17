@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ShopComponent } from './shop/shop.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { ProductsComponent } from './products/products.component';
+import { ItemInfoComponent } from './item-info/item-info.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductsComponent } from './products/products.component';
     AdminComponent,
     ShopComponent,
     AdminNavComponent,
-    ProductsComponent
+    ProductsComponent,
+    ItemInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { ProductsComponent } from './products/products.component';
       { path: 'admin', component: AdminComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'admin/products', component: ProductsComponent },
-      { path: 'admin/products/item/:id', component: ItemComponent }
+      { path: 'admin/products/item', component: ItemComponent },
+      { path: 'admin/products/item-info', component: ItemInfoComponent }
     ]),
   ],
   providers: [],
