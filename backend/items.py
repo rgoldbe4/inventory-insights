@@ -23,7 +23,7 @@ def get_item():
   item_id = data['id']
   session = Session()
   item = item_helper.get(session, item_id)
-  item = item.serialize()
+  item = item.to_dict()
   session.close()
   return jsonify({ 'item' : item })
 

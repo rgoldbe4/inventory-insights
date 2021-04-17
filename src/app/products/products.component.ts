@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -8,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   // All items to display on the page.
   items: any = [];
@@ -18,11 +19,14 @@ export class ProductsComponent implements OnInit {
   maxItems: number = 10; // The maximum number of items to display per page.
   numItems: number = 10; // The number of items in total
   pages: number[] = []; // The number of pages to display, in an array.
+  currentPage: number = 0;
+  maxPages: number = 0;
 
   // Update the displayedItems array with correct elements upon clicked.
   getDisplayedItems(start: number, end: number): void {
-    start = start * 10;
-    end = end * 10;
+    this.currentPage = start;
+    start = start * this.maxItems;
+    end = end * this.maxItems;
     this.displayedItems = [];
     for (let i = start; i < end; i++) {
       if (this.items[i] != undefined)
@@ -34,10 +38,11 @@ export class ProductsComponent implements OnInit {
     this.http.get('http://127.0.0.1:5000/items/all').toPromise().then(result => {
       this.items = result['items'];
       this.numItems = result['items'].length;
+      this.maxPages = Math.ceil(this.numItems / this.maxItems);
       // Default from 0 to 10.
-      this.getDisplayedItems(0, 1);
+      this.getDisplayedItems(this.currentPage, this.currentPage + 1);
       // Maps from 0 to numPages (0 to 10 would be [0,1,2,3,...,10])
-      this.pages = Array(Math.ceil(this.numItems / this.maxItems)).map((x, i)=>i);
+      this.pages = Array(this.maxPages).map((x, i)=>i);
     });
   }
 

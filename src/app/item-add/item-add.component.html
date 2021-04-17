@@ -1,15 +1,7 @@
 <app-admin-nav></app-admin-nav>
 <div class="row">
-  <div class="col">
-    <h2 class="text-center">Product Name</h2>
-  </div>
-</div>
-<div class="row padding-bottom">
-  <div class="col">
-    <a class="btn btn-outline-primary btn-lg float-right" href="admin/products/item/add">
-      <i class="bi bi-plus-circle"></i>
-      Add New
-    </a>
+  <div class="col text-center">
+    <h2>Creating New Item</h2>
   </div>
 </div>
 <div class="row">
@@ -44,16 +36,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col text-center">
-    <button type="button" class="btn btn-outline-success btn-lg float-left">
-      <i class="bi bi-save"></i>
-      Save
+  <div class="col">
+    <button class="btn btn-outline-primary btn-lg float-left" (click)="addItem()">
+      <i class="bi bi-plus-circle"></i> Add New
     </button>
-    <button type="button" class="btn btn-outline-danger btn-lg float-right">
-      <i class="bi bi-x-circle"></i>
-      Discontinue
-    </button>
+    <a class="btn btn-primary btn-lg float-right" href="admin/products">
+      Return To Product List
+    </a>
   </div>
 </div>
-
-

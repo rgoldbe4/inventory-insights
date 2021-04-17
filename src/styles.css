@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.padding-top {
+  padding-top: 10px;
+}
+.padding-bottom {
+  padding-bottom: 10px;
+}

@@ -11,6 +11,7 @@ class License(database.Base, SerializerMixin):
   id = Column(Integer, primary_key=True)
   accounts = Column(Integer)
   administrators = relationship('Administrator', back_populates='license')
+  # items = relationship('Item', back_populates='license')
 
   def default(self, o):
     return o.__dict__
@@ -60,11 +61,16 @@ class Item(database.Base, SerializerMixin):
   name = Column(String(50))
   price = Column(Float)
   # discontinued = Column(Boolean)
+  # description = Column(String(500))
+  # cost = Column(Float)
+  # image = Column(String(100))
 
   # Relationships
   cart_id = Column(Integer, ForeignKey('cart.id'))
   order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
+  # license_id = Column(Integer, ForeignKey('license.id'))
+  # license = relationship('License', uselist=False, back_populates='items')
 
   def default(self, o):
     return o.__dict__
