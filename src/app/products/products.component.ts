@@ -10,27 +10,24 @@ export class ProductsComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
+  // All items to display on the page.
   items: any = [];
 
-  displayedItems: any[] = [];
+  // Pagination
+  displayedItems: any[] = []; // The items to display on the page.
+  maxItems: number = 10; // The maximum number of items to display per page.
+  numItems: number = 10; // The number of items in total
+  pages: number[] = []; // The number of pages to display, in an array.
 
-  startPage: number = 0;
-  endPage: number = 10;
-  maxItems: number = 10;
-
-  numItems: number = 10;
-
-  pages: number[] = [];
-
-  getDisplayedItems(start: number, end: number) {
-    this.startPage = start;
-    this.endPage = end;
+  // Update the displayedItems array with correct elements upon clicked.
+  getDisplayedItems(start: number, end: number): void {
+    start = start * 10;
+    end = end * 10;
     this.displayedItems = [];
     for (let i = start; i < end; i++) {
       if (this.items[i] != undefined)
         this.displayedItems.push(this.items[i]);
     }
-    console.log(this.displayedItems);
   }
 
   ngOnInit(): void {
@@ -39,6 +36,7 @@ export class ProductsComponent implements OnInit {
       this.numItems = result['items'].length;
       // Default from 0 to 10.
       this.getDisplayedItems(0, 10);
+      // Maps from 0 to numPages (0 to 10 would be [0,1,2,3,...,10])
       this.pages = Array(Math.ceil(this.numItems / this.maxItems)).map((x, i)=>i);
     });
   }
