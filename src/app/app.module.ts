@@ -28,7 +28,7 @@ import { ProductsComponent } from './products/products.component';
       { path: 'admin', component: AdminComponent },
       { path: 'shop', component: ShopComponent },
       { path: 'admin/products', component: ProductsComponent },
-      { path: 'admin/products/item', component: ItemComponent }
+      { path: 'admin/products/item/:id', component: ItemComponent }
     ]),
   ],
   providers: [],
