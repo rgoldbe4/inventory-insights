@@ -12,10 +12,12 @@ import { ShopComponent } from './shop/shop.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { ProductsComponent } from './products/products.component';
 import { ItemInfoComponent } from './item-info/item-info.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import { ItemAddComponent } from './item-add/item-add.component';
-import { CartComponent } from "./cart/cart.component";
+import { CartComponent } from './cart/cart.component';
 import { SplashComponent } from './splash/splash.component';
+import { LoginComponent } from './login/login.component';
+import { SplashNavComponent } from './splash-nav/splash-nav.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { SplashComponent } from './splash/splash.component';
     ItemAddComponent,
     CartComponent,
     SplashComponent,
+    LoginComponent,
+    SplashNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,8 @@ import { SplashComponent } from './splash/splash.component';
       {path: 'admin/products/item/edit/:id', component: ItemComponent},
       {path: 'admin/products/item/info/:id', component: ItemInfoComponent},
       {path: 'admin/products/item/add', component: ItemAddComponent},
-      {path: 'shop/cart', component: CartComponent}
+      {path: 'shop/cart', component: CartComponent},
+      {path: 'login', component: LoginComponent},
     ]),
     FormsModule,
   ],
