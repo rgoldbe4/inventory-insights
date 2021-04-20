@@ -46,7 +46,7 @@ import { SplashNavComponent } from './splash-nav/splash-nav.component';
       {path: 'admin/products/item/info/:id', component: ItemInfoComponent},
       {path: 'admin/products/item/add', component: ItemAddComponent},
       {path: 'shop/cart', component: CartComponent},
-      {path: 'login', component: LoginComponent},
+      {path: 'admin/login', component: LoginComponent}, // Administrator Login
     ]),
     FormsModule,
   ],
