@@ -47,15 +47,15 @@ export class ProductsComponent implements OnInit {
   // Discontinue a product.
   discontinue(id: number) : void {
     let data = { id: id };
-    this.http.post('http://127.0.0.1:5000/items/discontinue', data).toPromise().then(result => {
-      this.items = result['items'];
+    this.http.post<any>('http://127.0.0.1:5000/items/discontinue', data).subscribe(result => {
+      this.items = result.item;
       this.updatePagination(result);
     });
   }
 
   ngOnInit(): void {
-    this.http.get('http://127.0.0.1:5000/items/all').toPromise().then(result => {
-      this.items = result['items'];
+    this.http.get<any>('http://127.0.0.1:5000/items/all').subscribe(result => {
+      this.items = result.items;
       this.updatePagination(result);
     });
   }

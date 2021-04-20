@@ -15,11 +15,17 @@ export class ItemComponent implements OnInit {
   id: number;
   item: any = {};
 
+  // When the user clicks the Save button
+  save(): void {
+
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe( params => {
       this.id = params['id'];
-      this.http.post('http://127.0.0.1:5000/items/item', { id: this.id }).toPromise().then(result => {
-          this.item = result['item'];
+      // Retrieves the current item based off the given ID.
+      this.http.post<any>('http://127.0.0.1:5000/items/item', { id: this.id }).subscribe(result => {
+          this.item = result.item;
       });
     })
   }

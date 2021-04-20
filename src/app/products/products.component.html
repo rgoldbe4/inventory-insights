@@ -5,7 +5,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col">
+  <div class="col padding-bottom">
     <a class="btn btn-outline-primary float-right" href="admin/products/item/add">
       <i class="bi bi-plus-circle"></i>
       Add New Item
@@ -33,9 +33,9 @@
           <td>${{ item.price }}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Options">
-              <a class="btn btn-outline-primary" href="admin/products/item/info/{{item.id}}">Statistics</a>
+              <a class="btn btn-outline-primary" href="admin/products/item/info/{{item.id}}">Details</a>
               <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">Edit Item</a>
-              <button class="btn btn-outline-danger" (click)="discontinue(item.id)">Discontinue Item</button>
+              <button class="btn btn-outline-danger" (click)="discontinue(item.id)"><i class="bi bi-x-circle"></i> Discontinue Item</button>
             </div>
           </td>
         </tr>
