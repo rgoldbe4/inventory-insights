@@ -19,6 +19,7 @@ import { SplashComponent } from './splash/splash.component';
 import { LoginComponent } from './login/login.component';
 import { SplashNavComponent } from './splash-nav/splash-nav.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AdminAccountComponent } from './admin-account/admin-account.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     SplashNavComponent,
     LogoutComponent,
+    AdminAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { LogoutComponent } from './logout/logout.component';
       {path: 'shop/cart', component: CartComponent},
       {path: 'admin/login', component: LoginComponent}, // Administrator Login
       {path: 'logout', component: LogoutComponent},
+      {path: 'admin/account', component: AdminAccountComponent},
     ]),
     FormsModule,
   ],
