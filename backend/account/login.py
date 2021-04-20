@@ -29,6 +29,7 @@ def index():
   session.close()
   return jsonify({'exists': exists, 'administrator': admin })
 
+
 @login_blueprint.route('/account/create/', methods=['POST'])
 def create():
   req = request.json

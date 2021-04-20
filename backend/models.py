@@ -9,7 +9,9 @@ class License(database.Base, SerializerMixin):
   __tablename__ = 'license'
 
   id = Column(Integer, primary_key=True)
-  accounts = Column(Integer)
+  accounts = Column(Integer) # This is the number of Administrators allowed.
+  # name = Column(String) # This is the company's name.
+
   administrators = relationship('Administrator', back_populates='license')
   # items = relationship('Item', back_populates='license')
 
