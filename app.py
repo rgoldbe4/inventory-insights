@@ -1,15 +1,14 @@
-from flask import Flask, jsonify
-from backend.account.login import *
-from backend.items import *
+from flask import Flask
+
+from backend.routes.administrators import administrator_blueprint
+from backend.routes.items import *
 from backend.models import *
 from flask_cors import CORS
 from database import *
-import backend.database_script as script
-from backend.helpers import administrator_helper
 
 app = Flask(__name__)
 CORS(app)
-app.register_blueprint(login_blueprint)
+app.register_blueprint(administrator_blueprint)
 app.register_blueprint(item_blueprint)
 
 # Create a database with the correct models.
