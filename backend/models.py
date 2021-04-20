@@ -9,11 +9,10 @@ class License(database.Base, SerializerMixin):
   __tablename__ = 'license'
 
   id = Column(Integer, primary_key=True)
-  accounts = Column(Integer) # This is the number of Administrators allowed.
-  # name = Column(String(200)) # This is the company's name.
-
+  accounts = Column(Integer)
+  name = Column(String)
   administrators = relationship('Administrator', back_populates='license')
-  # items = relationship('Item', back_populates='license')
+  items = relationship('Item', back_populates='license')
 
   def default(self, o):
     return o.__dict__
@@ -62,17 +61,19 @@ class Item(database.Base, SerializerMixin):
   id = Column(Integer, primary_key=True)
   name = Column(String(50))
   price = Column(Float)
-  # discontinued = Column(Boolean)
-  # description = Column(String(500))
-  # cost = Column(Float)
-  # image = Column(String(100))
+  discontinued = Column(Boolean)
+  description = Column(String(500))
+  cost = Column(Float)
+  category = Column(String(50))
+  image = Column(String(100))
+  instock = Column(Integer)
 
   # Relationships
   cart_id = Column(Integer, ForeignKey('cart.id'))
   order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
-  # license_id = Column(Integer, ForeignKey('license.id'))
-  # license = relationship('License', uselist=False, back_populates='items')
+  license_id = Column(Integer, ForeignKey('license.id'))
+  license = relationship('License', uselist=False, back_populates='items')
 
   def default(self, o):
     return o.__dict__
