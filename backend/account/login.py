@@ -11,11 +11,23 @@ login_blueprint = Blueprint('login_blueprint', __name__)
 @login_blueprint.route('/account/login/', methods=['POST'])
 def index():
   req = request.json
-  username = req['username']
+  email = req['email']
   password = req['password']
-  admin = administrator_helper.login(username, password)
+  session = Session()
+  # Grab the current administrator from the database, if it exists it will return "None".
+  admin = administrator_helper.login(session=session, email=email, password=password)
+  exists = True
 
-  return jsonify({'message': 'Hello World'})
+  # Check if the login credentials worked
+  if admin is None:
+    exists = False
+  else:
+    # Serialize the admin variable from SQLAlchemy object
+    admin = admin.to_dict()
+
+  # Close the session to the database.
+  session.close()
+  return jsonify({'exists': exists, 'administrator': admin })
 
 @login_blueprint.route('/account/create/', methods=['POST'])
 def create():

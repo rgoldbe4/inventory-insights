@@ -21,5 +21,5 @@ def delete(session, id):
     return True
   return False
 
-def login(session, username, password):
-  return session.query(Administrator).filter_by(username=username, password=password).first()
+def login(session, email, password):
+  return session.query(Administrator).filter_by(email=email, password=password).first()

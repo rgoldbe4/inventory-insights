@@ -111,6 +111,7 @@ class Recommendation(database.Base, SerializerMixin):
 
   id = Column(Integer, primary_key=True)
   cart = relationship('Cart', uselist=False)
+
   recommended = relationship('Item', uselist=False)
   success = Column(Boolean)
 

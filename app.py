@@ -5,6 +5,7 @@ from backend.models import *
 from flask_cors import CORS
 from database import *
 import backend.database_script as script
+from backend.helpers import administrator_helper
 
 app = Flask(__name__)
 CORS(app)
@@ -17,7 +18,6 @@ Base.metadata.create_all(database.postgres_engine)
 @app.route('/')
 def hello_world():
   return jsonify(['Item A', 'Item B', 'Item C'])
-
 
 if __name__ == '__main__':
   app.run()
