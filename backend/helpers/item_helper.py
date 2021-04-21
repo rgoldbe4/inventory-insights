@@ -12,6 +12,8 @@ def add(session, name, price):
 def get(session, id):
   return session.query(Item).filter_by(id=id).first()
 
+def get_by_license(session, license):
+  return session.query(Item).filter_by(license=license).all()
 
 def delete(session, id):
   item = get(session=session, id=id)
@@ -20,3 +22,11 @@ def delete(session, id):
     session.commit()
     return True
   return False
+
+def discontinue(session, id):
+  item = get(session=session, id=id)
+  if item is not None:
+    item.discontinued = True
+    session.commit()
+    session.refresh(item)
+  return item

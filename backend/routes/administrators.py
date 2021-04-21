@@ -19,6 +19,8 @@ def login():
   # Grab the current administrator from the database, if it exists it will return "None".
   admin = administrator_helper.login(session=session, email=email, password=password)
   exists = True
+  admin_result = None
+  admin_license = None
 
   # Check if the login credentials worked
   if admin is None:
@@ -26,8 +28,9 @@ def login():
   else:
     # Serialize the admin variable from SQLAlchemy object
     admin_result = admin.to_dict()
+    admin_license = admin.license.to_dict()
 
-  admin_license = admin.license.to_dict()
+
   # Close the session to the database.
   session.close()
   return jsonify({ 'exists': exists, 'administrator': admin_result, 'license': admin_license })

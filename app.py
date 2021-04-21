@@ -8,6 +8,7 @@ from database import *
 
 app = Flask(__name__)
 CORS(app)
+
 app.register_blueprint(administrator_blueprint)
 app.register_blueprint(item_blueprint)
 
