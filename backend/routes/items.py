@@ -31,6 +31,28 @@ def get_item():
   return jsonify({ 'item' : item })
 
 
+@item_blueprint.route('/items/addItem', methods=['POST'])
+def add_item():
+  data = request.json
+  new_item = data['item']
+  license_id = data['license_id']
+  session = Session()
+
+  name = new_item['name']
+  cost = new_item['cost']
+  price = new_item['price']
+  description = new_item['description']
+  instock = new_item['instock']
+  category = new_item['category']
+  license = license_helper.get(session, license_id)
+  item = item_helper.add(session=session, cost=cost, price=price, description=description, instock=instock, name=name, category=category, license=license)
+  item = item.to_dict()
+
+  session.close()
+
+  return jsonify({ 'item' : item })
+
+
 @item_blueprint.route('/items/discontinue', methods=['POST'])
 def discontinue():
   data = request.json
