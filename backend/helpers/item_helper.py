@@ -1,9 +1,10 @@
 from database import *
 from backend.models import *
 
-def add(session, name, price):
-  item = Item(price=price, name=name)
-  session.add(item)
+def add(session, name, price, description, cost, category, instock):
+  item = Item(name=name, price=price, discontinued=False, description=description,
+              cost=cost, category=category, instock=instock)
+  item = session.add(item)
   session.commit()
   session.refresh(item)
   return item
