@@ -9,6 +9,9 @@ def add(session, license, first_name, last_name, email, owner, password):
   session.refresh(administrator)
   return administrator
 
+# Get all Administrators from a license.
+def get_by_license(session, license):
+  return session.query(Administrator).filter_by(license=license).all()
 
 def get(session, id):
   return session.query(Administrator).filter_by(id=id).first()

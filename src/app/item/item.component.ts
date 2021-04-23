@@ -17,7 +17,22 @@ export class ItemComponent implements OnInit {
 
   // When the user clicks the Save button
   save(): void {
+    // Make sure all of the fields are filled in.
+    if (this.item.name && this.item.price && this.item.cost &&
+      this.item.description && this.item.instock && this.item.category) {
+      // Send the item to the database
+      this.http.post<any>('http://127.0.0.1:5000/items/save', { item: this.item }).subscribe(result => {
+        this.item = result.item;
+      });
+    }
+  }
 
+  // When the user clicks the Discontinue button
+  discontinue(): void {
+    this.http.post<any>('http://127.0.0.1:5000/items/discontinue',{ id: this.item.id, license_id: this.item.license.id }).subscribe(result => {
+      console.log(result.item);
+      this.item = result.item;
+    });
   }
 
   ngOnInit(): void {

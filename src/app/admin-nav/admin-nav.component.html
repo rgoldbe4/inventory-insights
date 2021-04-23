@@ -29,12 +29,20 @@
       </ul>
     </div>
     <form class="d-flex">
-      <a href="#" class="btn btn-outline-primary" >
-        <i class="bi bi-file-person"></i> <span class="administrator">Administrator</span></a>
-    </form>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <div class="padding-right">
+        <a href="admin/account" class="btn btn-outline-primary padding-right" *ngIf="administrator.id">
+          <i class="bi bi-person-circle"></i>
+          <span class="administrator">
+            {{ administrator.last_name.toUpperCase() + ", " + administrator.first_name.toUpperCase() }}
+          </span>
+        </a>
+      </div>
+      <a href="logout" class="btn btn-outline-danger" *ngIf="administrator.id">
+        <i class="bi bi-person-x"></i>
+        <span class="logout">
+          Logout
+        </span>
+      </a>
     </form>
   </div>
 </nav>

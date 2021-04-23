@@ -19,6 +19,3 @@ def delete(session, id):
     session.commit()
     return True
   return False
-
-def get(session, key):
-  return session.query(License).filter_by(key=key).first()

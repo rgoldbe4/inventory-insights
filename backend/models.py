@@ -11,8 +11,6 @@ class License(database.Base, SerializerMixin):
   id = Column(Integer, primary_key=True)
   accounts = Column(Integer)
   name = Column(String)
-  administrators = relationship('Administrator', back_populates='license')
-  items = relationship('Item', back_populates='license')
 
   def default(self, o):
     return o.__dict__
@@ -30,7 +28,7 @@ class Administrator(database.Base, SerializerMixin):
   password = Column(String(100))
 
   license_id = Column(Integer, ForeignKey('license.id'))
-  license = relationship('License', uselist=False, back_populates='administrators')
+  license = relationship('License', uselist=False)
 
   def default(self, o):
     return o.__dict__
@@ -73,7 +71,7 @@ class Item(database.Base, SerializerMixin):
   order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
   license_id = Column(Integer, ForeignKey('license.id'))
-  license = relationship('License', uselist=False, back_populates='items')
+  license = relationship('License', uselist=False)
 
   def default(self, o):
     return o.__dict__
