@@ -103,6 +103,7 @@ class Order(database.Base, SerializerMixin):
   user = relationship('User')
   user_id = Column(Integer, ForeignKey('user.id'))
   items = relationship('Item')
+  date = Column(date_format)
 
   def default(self, o):
     return o.__dict__
