@@ -1,7 +1,7 @@
 from sqlalchemy_serializer import SerializerMixin
 
 import database
-from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float
+from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float, Date
 from sqlalchemy.orm import relationship
 
 # Licensing per Admin
@@ -86,6 +86,7 @@ class Cart(database.Base, SerializerMixin):
   user = relationship('User')
   items = relationship('Item')
   user_id = Column(Integer, ForeignKey('user.id'))
+  active = Column(Boolean)
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
 
   def default(self, o):
@@ -101,7 +102,7 @@ class Order(database.Base, SerializerMixin):
   user = relationship('User')
   user_id = Column(Integer, ForeignKey('user.id'))
   items = relationship('Item')
-  date = Column(date_format)
+  date = Column(Date)
 
   def default(self, o):
     return o.__dict__
