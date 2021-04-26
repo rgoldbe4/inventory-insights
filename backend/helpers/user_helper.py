@@ -21,7 +21,7 @@ Returns the user, can be None.
 def get(session, id):
     return session.query(User).filter_by(id=id).first()
 
-def get(session, email, password):
+def get_login(session, email, password):
   return session.query(User).filter_by(email=email, password=password).first()
 
 

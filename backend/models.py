@@ -1,8 +1,21 @@
 from sqlalchemy_serializer import SerializerMixin
 
 import database
-from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float, Date
+from sqlalchemy import Column, Integer, String, BigInteger, ForeignKey, Boolean, Float, Date, Table
 from sqlalchemy.orm import relationship
+
+
+association_cart_table = Table('cart_item', database.Base.metadata,
+    Column('id', Integer, primary_key=True),
+    Column('cart_id', Integer, ForeignKey('cart.id')),
+    Column('item_id', Integer, ForeignKey('item.id'))
+)
+
+association_order_table = Table('order_item', database.Base.metadata,
+    Column('id', Integer, primary_key=True),
+    Column('order_id', Integer, ForeignKey('order.id')),
+    Column('item_id', Integer, ForeignKey('item.id'))
+)
 
 # Licensing per Admin
 class License(database.Base, SerializerMixin):
@@ -45,8 +58,8 @@ class User(database.Base, SerializerMixin):
   last_name = Column(String(50))
 
   # Relationships
-  carts = relationship('Cart', back_populates='user')
-  orders = relationship('Order', back_populates='user')
+  carts = relationship('Cart')
+  orders = relationship('Order')
 
   def default(self, o):
     return o.__dict__
@@ -67,8 +80,6 @@ class Item(database.Base, SerializerMixin):
   instock = Column(Integer)
 
   # Relationships
-  cart_id = Column(Integer, ForeignKey('cart.id'))
-  order_id = Column(Integer, ForeignKey('order.id'))
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
   license_id = Column(Integer, ForeignKey('license.id'))
   license = relationship('License', uselist=False)
@@ -83,8 +94,7 @@ class Cart(database.Base, SerializerMixin):
 
   id = Column(Integer, primary_key=True)
 
-  user = relationship('User')
-  items = relationship('Item')
+  items = relationship('Item', secondary=association_cart_table)
   user_id = Column(Integer, ForeignKey('user.id'))
   active = Column(Boolean)
   recommendation_id = Column(Integer, ForeignKey('recommendation.id'))
@@ -99,9 +109,8 @@ class Order(database.Base, SerializerMixin):
 
   id = Column(Integer, primary_key=True)
 
-  user = relationship('User')
   user_id = Column(Integer, ForeignKey('user.id'))
-  items = relationship('Item')
+  items = relationship('Item', secondary=association_order_table)
   date = Column(Date)
 
   def default(self, o):
@@ -120,3 +129,5 @@ class Recommendation(database.Base, SerializerMixin):
 
   def default(self, o):
     return o.__dict__
+
+
