@@ -1,0 +1,29 @@
+<app-splash-nav></app-splash-nav>
+<div class="row">
+  <div class="col">
+    <h1 class="text-center">Login</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div *ngIf="errors.length > 0" class="alert alert-danger">
+      <span *ngFor="let error of errors">{{ error }}</span><br />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <form>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="admin.email" id="email" aria-describedby="email" placeholder="Enter email">
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" [(ngModel)]="admin.password" class="form-control" name="password" id="password" placeholder="Password">
+      </div>
+      <button class="btn btn-outline-primary" type="button" (click)="login()">Login</button>
+    </form>
+  </div>
+</div>

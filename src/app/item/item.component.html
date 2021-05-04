@@ -1,0 +1,83 @@
+<app-admin-nav></app-admin-nav>
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Product Name</h2>
+  </div>
+</div>
+<div class="row padding-bottom">
+  <div class="col">
+    <a class="btn btn-outline-primary btn-lg float-right" href="admin/products/item/add">
+      <i class="bi bi-plus-circle"></i>
+      Add New
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <img src="assets/cartIcon.PNG" class="img-thumbnail img" />
+  </div>
+  <div class="col">
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="sku">SKU: </label>
+      </div>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.id" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="sku" name="sku">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="itemName">Name: </label>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="item.name" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="itemName" name="itemName">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="sku">Category: </label>
+      </div>
+      <input type="text" class="form-control " [(ngModel)]="item.category" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="category" name="category">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="price">Sell Price ($):</label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.price" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="price" name="price">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="cost">Supplier Cost ($):</label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.cost" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="cost" name="cost">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="itemDescription">Description: </label>
+      </div>
+      <textarea class="form-control" [(ngModel)]="item.description" aria-label="itemDescriptionSpan" id="itemDescription" name="itemName"></textarea>
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="stock">Stock: </label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.instock" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="stock" name="stock">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button type="button" (click)="save()" class="btn btn-outline-success btn-lg float-left">
+      <i class="bi bi-save"></i>
+      Save
+    </button>
+    <button type="button" (click)="discontinue()" class="btn btn-outline-danger btn-lg float-right">
+      <i class="bi bi-x-circle"></i>
+      Discontinue
+    </button>
+  </div>
+</div>
+
+

@@ -1,0 +1,77 @@
+<app-admin-nav></app-admin-nav>
+<div class="row">
+  <div class="col text-center">
+    <h2>Products</h2>
+  </div>
+</div>
+<div class="row padding-bottom">
+  <div class="col">
+    <button type="button" class="btn btn-outline-info" (click)="toggleDiscontinued()">
+      <span *ngIf="showDiscontinued"><i class="bi bi-x-circle"></i> Hide Discontinued Products</span>
+      <span *ngIf="!showDiscontinued"><i class="bi bi-check-circle"></i> Show Discontinued Products</span>
+    </button>
+  </div>
+  <div class="col">
+    <a class="btn btn-outline-primary float-right" href="admin/products/item/add">
+      <i class="bi bi-plus-circle"></i>
+      Add New Item
+    </a>
+  </div>
+</div>
+<div class="row">
+    <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#SKU</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price ($)</th>
+          <th scope="col">Cost ($)</th>
+          <th scope="col" *ngIf="showDiscontinued">Discontinued</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of displayedItems">
+        <tr *ngIf="!item.discontinued || showDiscontinued">
+          <th>{{ item.id }}</th>
+          <td>{{ item.name }}</td>
+          <td class="text-success">${{ item.price }}</td>
+          <td class="text-danger">${{ item.cost }}</td>
+          <td class="lead" *ngIf="showDiscontinued">
+            <span class="text-danger" *ngIf="item.discontinued">Yes</span>
+            <span *ngIf="!item.discontinued">No</span>
+          </td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Options">
+              <a class="btn btn-outline-primary" href="admin/products/item/info/{{item.id}}">
+                <i class="bi bi-card-list"></i> Details
+              </a>
+              <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">
+                <i class="bi bi-wrench"></i> Edit
+              </a>
+              <button class="btn btn-outline-danger" (click)="discontinue(item.id)">
+                <i class="bi bi-x-circle"></i> Discontinue
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" *ngIf="currentPage > 0"><span class="page-link" (click)="getDisplayedItems(currentPage - 1, currentPage)">Previous</span></li>
+            <li class="page-item" [ngClass]="{ 'active': currentPage == i }" *ngFor="let page of pages; let i = index;">
+              <span class="page-link" (click)="getDisplayedItems(i, i + 1)">{{ i+1 }}</span>
+            </li>
+            <li class="page-item" *ngIf="currentPage < maxPages - 1"><span class="page-link" (click)="getDisplayedItems(currentPage + 1, currentPage + 2)" >Next</span></li>
+        </ul>
+  </div>
+</div>
+

@@ -1,0 +1,66 @@
+<app-admin-nav></app-admin-nav>
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Add New Product</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="itemName">Name: </label>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="item.name" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="itemName" name="itemName">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="sku">Category: </label>
+      </div>
+      <input type="text" class="form-control " [(ngModel)]="item.category" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="category" name="category">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="price">Sell Price ($):</label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.price" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="price" name="price">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="cost">Supplier Cost ($):</label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.cost" aria-label="Large"  aria-describedby="inputGroup-sizing-sm" id="cost" name="cost">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="itemDescription">Description: </label>
+      </div>
+      <textarea class="form-control" [(ngModel)]="item.description" aria-label="itemDescriptionSpan" id="itemDescription" name="itemName"></textarea>
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="stock">Stock: </label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.instock" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="stock" name="stock">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button type="button" (click)="addItem()" class="btn btn-outline-success btn-lg float-left">
+      <i class="bi bi-plus-circle"></i>
+      Add Item
+    </button>
+    <a href="admin/products" type="button" class="btn btn-outline-secondary btn-lg float-right" >
+      <i class="bi bi-arrow-90deg-left"></i>
+      Return to Products
+    </a>
+  </div>
+</div>
+
+
