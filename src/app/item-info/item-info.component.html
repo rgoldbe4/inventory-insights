@@ -2,11 +2,20 @@
 
 
 <div class="row">
+<div class="col-12">
+  <div *ngIf="item.discontinued" class="alert alert-danger text-center" role="alert">
+    This product has been Discontinued
+  </div>
+</div>
   <div class="col-7 text-right">
-    <h2>Test Item: Info</h2>
+    <h2>Product: {{item.name}}</h2>
   </div>
   <div class="col-5 text-center">
-    <button type="button" class="btn btn-primary btn-lg">Edit Details</button>
+    <div class="btn-group" role="group" aria-label="Options">
+      <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">
+        <i class="bi btn-lg bi-wrench"></i> Edit
+      </a>
+    </div>
   </div><br><br><br><br><br>
 
   <div class="col-6 text-center">
@@ -17,16 +26,32 @@
   </div><br><br><br><br><br>
 
   <div class="col-6 text-left">
-    <h4>Current Stock: Stock amount</h4>
+    <h4>Current Stock: {{item.instock}}</h4>
+    <h4>Price: ${{(item.price) | number:'1.2-2'}}</h4>
+    <h4>Cost: ${{(item.cost) | number:'1.2-2'}}</h4>
+    <h4>Profit: ${{(item.price - item.cost) | number:'1.2-2'}} </h4>
   </div>
   <div class="col-6 text-right">
     <h4>Anticipated Demand: Stock amount</h4>
+    <h4>Total Price: ${{(item.price * item.instock) | number:'1.2-2'}}</h4>
+    <h4>Total Cost: ${{ (item.cost * item.instock) | number:'1.2-2'}}</h4>
+    <h4>Total Profit: ${{((item.price - item.cost) * item.instock) | number:'1.2-2'}}</h4>
+
   </div><br><br><br><br><br>
 
   <div class="col-6 text-left">
-    <button type="button" class="btn btn-primary btn-lg">Order More</button>
+    <div class="btn-group" role="group" aria-label="Options">
+      <a class="btn btn-outline-primary btn-lg" href="#">
+        <i class="bi bi-card-list"></i> Order More
+      </a>
+    </div>
   </div>
   <div class="col-6 text-right">
-    <button type="button" class="btn btn-primary btn-lg">Discontinue Product</button>
+    <div class="col text-center">
+      <button type="button" *ngIf="!item.discontinued" (click)="discontinue()" class="btn btn-outline-danger btn-lg float-right">
+        <i class="bi bi-x-circle"></i>
+          Discontinue
+        </button>
+    </div>
   </div><br><br><br><br><br>
 </div>
