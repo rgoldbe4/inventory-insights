@@ -11,7 +11,6 @@ administrator_blueprint = Blueprint('administrator_blueprint', __name__)
 
 @administrator_blueprint.route('/admin/login', methods=['POST'])
 def login():
-  sys.setrecursionlimit(1500)
   req = request.json
   email = req['email']
   password = req['encrypted_password']  # Comes encrypted
