@@ -12,6 +12,9 @@ def add(session, accounts):
 def get(session, id):
   return session.query(License).filter_by(id=id).first()
 
+def get_all(session):
+  return session.query(License).all()
+
 def delete(session, id):
   license = get(id)
   if license is not None:

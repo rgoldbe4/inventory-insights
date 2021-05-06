@@ -1,8 +1,4 @@
-from flask import Blueprint, render_template, abort, jsonify, request
-from flask.json import dumps
-import sys
-
-from backend.models import Item
+from flask import Blueprint, jsonify, request
 from database import *
 from backend.helpers import administrator_helper, license_helper
 

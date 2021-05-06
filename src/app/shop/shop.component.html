@@ -1,1 +1,19 @@
-<p>shop works!</p>
+<div class="row">
+  <div class="col">
+    <h1>Choose Where To Shop!</h1>
+  </div>
+</div>
+<div class="row" *ngIf="licenses">
+  <div class="col-md-5" *ngFor="let license of licenses">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ license.name }}</h5>
+        <p class="card-text">
+          Examples:
+          <em>{{ license.first_example.name }}, {{ license.second_example.name }}, {{ license.third_example.name }}...</em>
+        </p>
+        <button type="button" (click)="selectLicense(license.id)" class="card-link btn btn-outline-primary">Shop Here!</button>
+      </div>
+    </div>
+  </div>
+</div>
