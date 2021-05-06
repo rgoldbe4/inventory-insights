@@ -2,45 +2,78 @@
 
 
 <div class="row">
-<div class="col">
-  <div *ngIf="item.discontinued" class="alert alert-danger text-center" role="alert">
-    This product has been Discontinued
+  <div class="col">
+    <div *ngIf="item.discontinued" class="alert alert-danger text-center" role="alert">
+      This product has been Discontinued
+    </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-10 text-center">
+    <h2>Product: {{item.name}}</h2>
   </div>
-  <div class="row">
-    <div class="col text-right">
-      <h2>Product: {{item.name}}</h2>
-    </div>
-    <div class="col text-center">
-        <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">
-          <i class="bi bi-wrench"></i> Edit
-        </a>
-    </div>
+  <div class="col text-right">
+      <a class="btn btn-outline-secondary btn-lg" href="admin/products/item/edit/{{item.id}}">
+        <i class="bi bi-wrench"></i> Edit
+      </a>
   </div>
+</div>
 
-  <div class="row">
-    <div class="col text-center">
-      <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
-    </div>
+<div class="row">
+  <div class="col text-center">
+    <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
+  </div>
 
   <div class="col-6 text-center">
     <img src="assets/pricehistory.png" alt="Price History Graph" class="logo">
   </div>
-  </div>
+</div>
 
-<div class="row">
-  <div class="col-6 text-left">
-    <h4>Current Stock: {{item.instock}}</h4>
-    <h4>Price: ${{(item.price) | number:'1.2-2'}}</h4>
-    <h4>Cost: ${{(item.cost) | number:'1.2-2'}}</h4>
-    <h4>Profit: ${{(item.price - item.cost) | number:'1.2-2'}} </h4>
+<div class="row lead">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <span class="b">Current Stock:</span> {{ item.instock }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Price:</span> ${{ item.price | number:'1.2-2' }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Cost:</span> ${{ item.cost | number:'1.2-2' }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Profit:</span> ${{ item.profit | number:'1.2-2' }}
+      </div>
+    </div>
   </div>
-  <div class="col-6 text-right">
-    <h4>Anticipated Demand: Stock amount</h4>
-    <h4>Total Price: ${{(item.price * item.instock) | number:'1.2-2'}}</h4>
-    <h4>Total Cost: ${{ (item.cost * item.instock) | number:'1.2-2'}}</h4>
-    <h4>Total Profit: ${{((item.price - item.cost) * item.instock) | number:'1.2-2'}}</h4>
+  <div class="col">
+     <div class="row">
+      <div class="col">
+        <span class="b">Anticipated Demand:</span> N/A
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Price:</span> ${{ item.total_price | number:'1.2-2' }}
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Cost:</span> ${{ item.total_cost | number:'1.2-2' }}
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Profit:</span> ${{ item.total_price | number:'1.2-2' }}
+      </div>
+    </div>
+
 
   </div>
 </div>

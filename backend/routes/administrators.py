@@ -93,7 +93,28 @@ def get_single_admin():
   # Grab the ID of the administrator
   session = Session() # Creates a session that connects to the database
   admin = administrator_helper.get(session=session, id=admin_id)
-  admin = admin.to_dict() # Serializes the data so it can be converted to JSON
+  if admin is not None:
+    admin = admin.to_dict() # Serializes the data so it can be converted to JSON
 
   # Return the administrator
+  return jsonify({ 'admin': admin })
+
+
+@administrator_blueprint.route('/admin/save', methods=['POST'])
+def save_admin():
+  data = request.json
+  admin_id = data['id']
+  first_name = data['first_name']
+  last_name = data['last_name']
+  email = data['email']
+
+  session = Session()
+  admin = administrator_helper.get(session, admin_id)
+  admin.first_name = first_name
+  admin.last_name = last_name
+  admin.email = email
+
+  session.commit()
+  admin = admin.to_dict()
+  session.close()
   return jsonify({ 'admin': admin })

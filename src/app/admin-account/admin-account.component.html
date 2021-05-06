@@ -2,7 +2,56 @@
 <div class="row">
   <div class="col">
     <h2 class="text-center" *ngIf="administrator">
-      {{ administrator.full_name }}
+      Your Account
     </h2>
+  </div>
+</div>
+<div class="row" *ngIf="administrator">
+  <div class="col">
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="first_name">First Name: </label>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="administrator.first_name" id="first_name" name="first_name">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="last_name">Last Name: </label>
+      </div>
+      <input type="text" class="form-control" [(ngModel)]="administrator.last_name" id="last_name" name="last_name">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="email">Email: </label>
+      </div>
+      <input type="email" class="form-control" [(ngModel)]="administrator.email" id="email" name="email">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="license">License ID: </label>
+      </div>
+      <input type="text" aria-disabled="true" class="form-control" disabled="disabled" [(ngModel)]="administrator.license_id" id="license" name="license">
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <button type="button" (click)="save()" class="btn btn-outline-success btn-lg">
+      <i class="bi bi-person-check"></i>
+      Save
+    </button>
+  </div>
+  <div class="col text-right">
+    <a href="logout" class="btn btn-lg btn-outline-danger" *ngIf="administrator.id">
+      <i class="bi bi-person-x"></i>
+      <span class="logout">
+        Logout
+      </span>
+    </a>
   </div>
 </div>

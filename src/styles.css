@@ -13,3 +13,7 @@
 .padding-left {
   padding-left: 10px;
 }
+
+.b, .bold {
+  font-weight: bold;
+}

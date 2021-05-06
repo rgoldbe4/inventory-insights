@@ -21,6 +21,7 @@ export class ItemInfoComponent implements OnInit {
       // Send the item to the database
       this.http.post<any>('http://127.0.0.1:5000/items/save', { item: this.item }).subscribe(result => {
         this.item = result.item;
+        this.updateItemValues()
       });
     }
   }
@@ -30,6 +31,7 @@ export class ItemInfoComponent implements OnInit {
     this.http.post<any>('http://127.0.0.1:5000/items/discontinue',{ id: this.item.id, license_id: this.item.license.id }).subscribe(result => {
       console.log(result.item);
       this.item = result.item;
+      this.updateItemValues()
     });
   }
 
@@ -39,8 +41,16 @@ export class ItemInfoComponent implements OnInit {
       // Retrieves the current item based off the given ID.
       this.http.post<any>('http://127.0.0.1:5000/items/item', { id: this.id }).subscribe(result => {
           this.item = result.item;
+          this.updateItemValues()
       });
     });
+  }
+
+  updateItemValues(): void {
+      this.item.profit = this.item.price - this.item.cost;
+      this.item.total_price = this.item.price * this.item.instock;
+      this.item.total_cost = this.item.cost * this.item.instock;
+      this.item.total_profit = this.item.profit * this.item.instock;
   }
 
 }
