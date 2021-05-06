@@ -2,29 +2,34 @@
 
 
 <div class="row">
-<div class="col-12">
+<div class="col">
   <div *ngIf="item.discontinued" class="alert alert-danger text-center" role="alert">
     This product has been Discontinued
   </div>
 </div>
-  <div class="col-7 text-right">
-    <h2>Product: {{item.name}}</h2>
   </div>
-  <div class="col-5 text-center">
-    <div class="btn-group" role="group" aria-label="Options">
-      <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">
-        <i class="bi btn-lg bi-wrench"></i> Edit
-      </a>
+  <div class="row">
+    <div class="col text-right">
+      <h2>Product: {{item.name}}</h2>
     </div>
-  </div><br><br><br><br><br>
-
-  <div class="col-6 text-center">
-    <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
+    <div class="col text-center">
+        <a class="btn btn-outline-secondary" href="admin/products/item/edit/{{item.id}}">
+          <i class="bi bi-wrench"></i> Edit
+        </a>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
+    </div>
+
   <div class="col-6 text-center">
     <img src="assets/pricehistory.png" alt="Price History Graph" class="logo">
-  </div><br><br><br><br><br>
+  </div>
+  </div>
 
+<div class="row">
   <div class="col-6 text-left">
     <h4>Current Stock: {{item.instock}}</h4>
     <h4>Price: ${{(item.price) | number:'1.2-2'}}</h4>
@@ -37,21 +42,19 @@
     <h4>Total Cost: ${{ (item.cost * item.instock) | number:'1.2-2'}}</h4>
     <h4>Total Profit: ${{((item.price - item.cost) * item.instock) | number:'1.2-2'}}</h4>
 
-  </div><br><br><br><br><br>
+  </div>
+</div>
 
-  <div class="col-6 text-left">
-    <div class="btn-group" role="group" aria-label="Options">
+<div class="row">
+  <div class="col">
       <a class="btn btn-outline-primary btn-lg" href="#">
         <i class="bi bi-card-list"></i> Order More
       </a>
-    </div>
   </div>
-  <div class="col-6 text-right">
-    <div class="col text-center">
+  <div class="col">
       <button type="button" *ngIf="!item.discontinued" (click)="discontinue()" class="btn btn-outline-danger btn-lg float-right">
-        <i class="bi bi-x-circle"></i>
-          Discontinue
-        </button>
+        <i class="bi bi-x-circle"></i> Discontinue
+      </button>
     </div>
-  </div><br><br><br><br><br>
 </div>
+
