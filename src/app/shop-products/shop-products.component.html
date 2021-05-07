@@ -1,1 +1,49 @@
-<p>shop-products works!</p>
+<app-shop-nav></app-shop-nav>
+<div class="row">
+  <div class="col text-center">
+    <h2>Products</h2>
+  </div>
+</div>
+<div class="row">
+    <div class="col">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price ($)</th>
+          <th scope="col">Stock</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let item of displayedItems">
+        <tr *ngIf="!item.discontinued">
+          <th>{{ item.name }}</th>
+          <td class="text-success">${{ item.price  | number:'1.2-2'}}</td>
+          <td class="text-secondary">{{ item.instock }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Options">
+              <a class="btn btn-outline-primary" href="shop/products/product/{{item.id}}">
+                <i class="bi bi-card-list"></i> View Details
+              </a>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" *ngIf="currentPage > 0"><span class="page-link" (click)="getDisplayedItems(currentPage - 1, currentPage)">Previous</span></li>
+            <li class="page-item" [ngClass]="{ 'active': currentPage == i }" *ngFor="let page of pages; let i = index;">
+              <span class="page-link" (click)="getDisplayedItems(i, i + 1)">{{ i+1 }}</span>
+            </li>
+            <li class="page-item" *ngIf="currentPage < maxPages - 1"><span class="page-link" (click)="getDisplayedItems(currentPage + 1, currentPage + 2)" >Next</span></li>
+        </ul>
+  </div>
+</div>
+
