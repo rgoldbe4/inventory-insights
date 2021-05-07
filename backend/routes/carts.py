@@ -2,6 +2,7 @@ from flask import jsonify, request, Blueprint
 
 from backend.helpers import cart_helper, user_helper, item_helper
 from backend.models import association_order_table
+from backend import recommend
 from database import Session
 
 cart_blueprint = Blueprint('cart_blueprint', __name__)
@@ -69,3 +70,13 @@ def remove_item_from_cart():
   item = item.to_dict()
   session.close()
   return jsonify({ 'cart': cart, 'item': item })
+
+@cart_blueprint.route('/cart/item/recommend', methods=['POST'])
+def recommend_items_from_cart():
+  data = request.json
+  cart_id = data['cart_id']
+  session = Session()
+  cart = cart_helper.get(session=session, id=cart_id)
+  items = recommend.recommendItem(session, cart)
+  return jsonify({'items' : items})
+
