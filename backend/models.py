@@ -8,13 +8,15 @@ from sqlalchemy.orm import relationship
 association_cart_table = Table('cart_item', database.Base.metadata,
     Column('id', Integer, primary_key=True),
     Column('cart_id', Integer, ForeignKey('cart.id')),
-    Column('item_id', Integer, ForeignKey('item.id'))
+    Column('item_id', Integer, ForeignKey('item.id')),
+    Column('quantity', Integer, default=1)
 )
 
 association_order_table = Table('order_item', database.Base.metadata,
     Column('id', Integer, primary_key=True),
     Column('order_id', Integer, ForeignKey('order.id')),
-    Column('item_id', Integer, ForeignKey('item.id'))
+    Column('item_id', Integer, ForeignKey('item.id')),
+    Column('quantity', Integer, default=1)
 )
 
 # Licensing per Admin
