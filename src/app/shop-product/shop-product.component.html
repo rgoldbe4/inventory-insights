@@ -1,0 +1,70 @@
+<app-shop-nav></app-shop-nav>
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">{{item.name}}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <img src="assets/cartIcon.PNG" class="img-thumbnail img" />
+  </div>
+  <div class="col">
+<!--    <div class="input-group input-group-lg form-group">-->
+<!--      <div class="input-group-prepend">-->
+<!--        <label class="input-group-text" for="sku">SKU: </label>-->
+<!--      </div>-->
+<!--      <input type="text" class="form-control disabled" [(ngModel)]="item.id" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="sku" name="sku">-->
+<!--    </div>-->
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <p class="input-group-text">Category: </p>
+      </div>
+      <h4 class = "form-control">{{item.category}}</h4>
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <p class="input-group-text">Sell Price ($): </p>
+      </div>
+      <h4 class = "form-control">{{item.price}}</h4>
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <p class="input-group-text">Description: </p>
+      </div>
+      <h4 class = "form-control">{{item.description}}</h4>
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <p class="input-group-text">Stock: </p>
+      </div>
+      <h4 class = "form-control">{{item.instock}}</h4>
+    </div><br>
+    <h2>Enter amount.... I will finish this page on 5/7/2021</h2>
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="stock">Stock: </label>
+      </div>
+      <input type="number" class="form-control" [(ngModel)]="item.instock" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="stock" name="stock">
+    </div>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button type="button" (click)="save()" class="btn btn-outline-success btn-lg float-left">
+      <i class="bi bi-save"></i>
+      Save
+    </button>
+    <button type="button"  class="btn btn-outline-danger btn-lg float-right">
+      <i class="bi bi-x-circle"></i>
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+

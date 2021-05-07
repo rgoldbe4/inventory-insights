@@ -26,6 +26,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserComponent } from './user/user.component';
 import { OrderComponent } from './order/order.component';
 import { ShopProductsComponent } from './shop-products/shop-products.component';
+import { ShopProductComponent } from './shop-product/shop-product.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ShopProductsComponent } from './shop-products/shop-products.component';
     UserComponent,
     OrderComponent,
     ShopProductsComponent,
+    ShopProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { ShopProductsComponent } from './shop-products/shop-products.component';
       {path: 'user/register', component: UserRegisterComponent},
       {path: 'shop/:id/cart', component: CartComponent},
       {path: 'shop/order', component: OrderComponent},
-      {path: 'shop/products', component: ShopProductsComponent}
+      {path: 'shop/products', component: ShopProductsComponent},
+      {path: 'shop/products/product/:id', component: ShopProductComponent}
     ]),
     FormsModule,
   ],
