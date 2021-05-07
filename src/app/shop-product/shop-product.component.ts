@@ -14,9 +14,9 @@ export class ShopProductComponent implements OnInit {
   id: number;
   item: any = {};
 
-  // When the user clicks the Discontinue button
+  // When the user clicks Add To Cart
   addToCart(): void {
-    this.http.post<any>('http://127.0.0.1:5000/cart',{ id: this.item.id, license_id: this.item.license.id }).subscribe(result => {
+    this.http.post<any>('http://127.0.0.1:5000/cart/',{ id: this.item.id, license_id: this.item.license.id }).subscribe(result => {
       this.item = result.item;
     });
   }
