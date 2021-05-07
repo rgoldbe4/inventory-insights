@@ -27,6 +27,7 @@ import { UserComponent } from './user/user.component';
 import { OrderComponent } from './order/order.component';
 import { ShopProductsComponent } from './shop-products/shop-products.component';
 import { ShopProductComponent } from './shop-product/shop-product.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ShopProductComponent } from './shop-product/shop-product.component';
     OrderComponent,
     ShopProductsComponent,
     ShopProductComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ import { ShopProductComponent } from './shop-product/shop-product.component';
       {path: 'admin/login', component: LoginComponent}, // Administrator Login
       {path: 'logout', component: LogoutComponent}, // Global logout (user and admin)
       {path: 'admin/account', component: AdminAccountComponent},
+      {path: 'admin/register', component: RegisterComponent},
 
       // Shop Paths
       {path: 'user/account', component: UserComponent},

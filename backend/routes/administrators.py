@@ -34,37 +34,37 @@ def login():
 @administrator_blueprint.route('/admin/register', methods=['POST'])
 def create():
   req = request.json
+  print(req)
+
   first_name = req['first_name']
   last_name = req['last_name']
   email = req['email']
   password = req['password'] # This should come encrypted.
-  license_id = req['license_id']
+  license_id = req['license']
+
 
   # Check if user exists
-  exists = True
   session = Session()
-  admin = administrator_helper.get(session=session, email=email, password=password)
+  admin = administrator_helper.login(session=session, email=email, password=password)
   admin_license = license_helper.get(session=session, id=license_id)
-  message = ""
+  errors = []
 
   if admin is None:
-    exists = False
     # Ensure that they have not used up their license.
-    administrators = administrator_helper.get(session=session, license=admin_license)
+    administrators = administrator_helper.get_by_license(session=session, license=admin_license)
     if admin_license.accounts > len(administrators):
       # Add administrator to database.
       admin = administrator_helper.add(session=session, first_name=first_name, last_name=last_name,
-                                     email=email, password=password, license=admin_license)
-      message = "Success. Administrator was successfully registered."
+                                     email=email, password=password, license=admin_license, owner=False)
     else:
-      message = "This license has no more remaining Administrator accounts left."
+      errors.append("This license has no more remaining Administrator accounts left.")
   else:
-    message = "The administrator already exists. Cannot create duplicates."
+    errors.append("The administrator already exists. Cannot create duplicates.")
 
   admin = admin.to_dict()
   admin_license = admin_license.to_dict()
   session.close()
-  return jsonify({ 'administrator': admin, 'exists': exists, 'message': message, 'license': admin_license })
+  return jsonify({ 'administrator': admin, 'license': admin_license, 'errors': errors })
 
 # Receives a license id and returns all administrators.
 @administrator_blueprint.route('/admin/all', methods=['POST'])
