@@ -26,4 +26,9 @@ padding: 50px 100px 50px 100px;
 margin: 40px 60px;
 }
 
+.icon{
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+}
 

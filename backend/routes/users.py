@@ -53,3 +53,22 @@ def register():
 
   session.close()
   return jsonify({ 'errors': errors, 'user': user })
+
+@user_blueprint.route('/user/save', methods=['POST'])
+def save_user():
+  data = request.json
+  user_id = data['id']
+  first_name = data['first_name']
+  last_name = data['last_name']
+  email = data['email']
+
+  session = Session()
+  user = user_helper.get(session, user_id)
+  user.first_name = first_name
+  user.last_name = last_name
+  user.email = email
+
+  session.commit()
+  user = user.to_dict()
+  session.close()
+  return jsonify({ 'user': user })
