@@ -13,16 +13,22 @@
           <a class="nav-link" href="shop/products">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="shop/cart">
-            Cart
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="shop/order">Orders</a>
         </li>
       </ul>
     </div>
      <form class="d-flex" *ngIf="user">
+      <div class="padding-right">
+          <a class="btn btn-outline-success" href="shop/cart">
+            <i class="bi bi-cart2"></i>
+            <span class="logout">
+             Cart
+            </span>
+          </a>
+      </div>
+
+
+
       <div class="padding-right">
         <a href="user/account" class="btn btn-outline-primary padding-right">
           <i class="bi bi-person-circle"></i>
