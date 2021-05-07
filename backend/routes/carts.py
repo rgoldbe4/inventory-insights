@@ -56,5 +56,16 @@ def check_if_user_has_cart():
 @cart_blueprint.route('/cart/item/remove', methods=['POST'])
 def remove_item_from_cart():
   data = request.json
-
-  return jsonify({})
+  cart_id = data['cart_id']
+  item_id = data['item_id']
+  session = Session()
+  # Find the cart
+  cart = cart_helper.get(session=session, id=cart_id)
+  item = item_helper.get(session=session, id=item_id)
+  cart.items.remove(item)
+  session.commit()
+  session.refresh(cart)
+  cart = cart.to_dict()
+  item = item.to_dict()
+  session.close()
+  return jsonify({ 'cart': cart, 'item': item })
