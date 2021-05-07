@@ -14,6 +14,7 @@ export class ShopProductComponent implements OnInit {
   id: number;
   item: any = {};
 
+
   // When the user clicks the Save button
   save(): void {
     // Make sure all of the fields are filled in.

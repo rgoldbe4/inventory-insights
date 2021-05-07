@@ -9,59 +9,51 @@
   <div class="col-md-3">
     <img src="assets/cartIcon.PNG" class="img-thumbnail img" />
   </div>
-  <div class="col">
-<!--    <div class="input-group input-group-lg form-group">-->
-<!--      <div class="input-group-prepend">-->
-<!--        <label class="input-group-text" for="sku">SKU: </label>-->
-<!--      </div>-->
-<!--      <input type="text" class="form-control disabled" [(ngModel)]="item.id" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="sku" name="sku">-->
-<!--    </div>-->
-
+  <div class = "col">
     <div class="input-group input-group-lg form-group">
       <div class="input-group-prepend">
-        <p class="input-group-text">Category: </p>
+        <label class="input-group-text" for="category">Category: </label>
       </div>
-      <h4 class = "form-control">{{item.category}}</h4>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.category" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="category" name="category">
     </div>
 
     <div class="input-group input-group-lg form-group">
       <div class="input-group-prepend">
-        <p class="input-group-text">Sell Price ($): </p>
+        <label class="input-group-text" for="price">Sell Price ($): </label>
       </div>
-      <h4 class = "form-control">{{item.price}}</h4>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.price" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="price" name="price">
     </div>
 
     <div class="input-group input-group-lg form-group">
       <div class="input-group-prepend">
-        <p class="input-group-text">Description: </p>
+        <label class="input-group-text" for="instock">Stock: </label>
       </div>
-      <h4 class = "form-control">{{item.description}}</h4>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.instock" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="instock" name="instock">
     </div>
 
     <div class="input-group input-group-lg form-group">
       <div class="input-group-prepend">
-        <p class="input-group-text">Stock: </p>
+        <label class="input-group-text" for="description">Description: </label>
       </div>
-      <h4 class = "form-control">{{item.instock}}</h4>
-    </div><br>
-    <h2>Enter amount.... I will finish this page on 5/7/2021</h2>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.description" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="description" name="description">
+    </div>
+  </div>
+
+</div>
+  <div class = row>
+    <h2>Enter Quantity</h2>
     <div class="input-group input-group-lg form-group">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="stock">Stock: </label>
+        <label class="input-group-text" for="quantity">Quantity: </label>
       </div>
-      <input type="number" class="form-control" [(ngModel)]="item.instock" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="stock" name="stock">
+      <input type="number" min="1" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" id="quantity" name="quantity">
     </div>
 
   </div>
-</div>
 <div class="row">
   <div class="col text-center">
-    <button type="button" (click)="save()" class="btn btn-outline-success btn-lg float-left">
-      <i class="bi bi-save"></i>
-      Save
-    </button>
-    <button type="button"  class="btn btn-outline-danger btn-lg float-right">
-      <i class="bi bi-x-circle"></i>
+    <button type="button"  class="btn btn-outline-success btn-lg float-right">
+      <i class="bi bi-cart-plus"></i>
       Add to Cart
     </button>
   </div>
