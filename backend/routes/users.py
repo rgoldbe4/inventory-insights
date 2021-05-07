@@ -31,3 +31,25 @@ def login():
     errors.append('User is not found. Try another combination.')
   session.close()
   return jsonify({ 'user': user, 'errors': errors })
+
+@user_blueprint.route('/user/register', methods=['POST'])
+def register():
+  data = request.json
+  errors = []
+  # Registration POST information
+  email = data['email']
+  first_name = data['first_name']
+  last_name = data['last_name']
+  password = data['encrypted_password']
+
+  session = Session()
+  # Determine if the user already exists.
+  user = user_helper.get_login(session=session, email=email, password=password)
+  if user is None:
+    user = user_helper.add(session=session, first_name=first_name, last_name=last_name, email=email, password=password)
+    user = user.to_dict()
+  else:
+    errors.append("That email is already in use. Try another.")
+
+  session.close()
+  return jsonify({ 'errors': errors, 'user': user })

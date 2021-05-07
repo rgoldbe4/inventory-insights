@@ -13,6 +13,7 @@ export class LogoutComponent implements OnInit {
     localStorage.removeItem("administrator_id");
     localStorage.removeItem("admin_license_id");
     localStorage.removeItem("user_id");
+    localStorage.removeItem('license_id');
     window.location.href="";
   }
 

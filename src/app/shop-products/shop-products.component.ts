@@ -13,7 +13,6 @@ export class ShopProductsComponent implements OnInit {
 
   // All items to display on the page.
   items: any = [];
-  showDiscontinued: boolean = false; // Whether or not to show discontinued items.
 
   // Pagination
   displayedItems: any[] = []; // The items to display on the page.
@@ -22,11 +21,6 @@ export class ShopProductsComponent implements OnInit {
   pages: number[] = []; // The number of pages to display, in an array.
   currentPage: number = 0;
   maxPages: number = 0;
-
-  // Toggle displaying discontinued items
-  toggleDiscontinued(): void {
-    this.showDiscontinued = !this.showDiscontinued;
-  }
 
   // Update the displayedItems array with correct elements upon clicked.
   getDisplayedItems(start: number, end: number): void {
@@ -50,25 +44,9 @@ export class ShopProductsComponent implements OnInit {
     this.pages = Array(this.maxPages).map((x, i)=>i);
   }
 
-  // Discontinue a product.
-  discontinue(id: number) : void {
-    let license_id = localStorage.getItem("admin_license_id");
-    this.http.post<any>('http://127.0.0.1:5000/items/discontinue',{ id: id, license_id: license_id })
-      .subscribe(discontinue_result => {
-        // Reacquire all of the items from the list.
-        this.http.post<any>('http://127.0.0.1:5000/items/all', { license_id: license_id })
-          .subscribe(result => {
-            this.items = result.items;
-            this.updatePagination(result);
-          }
-        );
-
-      }
-    );
-  }
-
   ngOnInit(): void {
-    let license_id = localStorage.getItem("admin_license_id");
+    // Update with license id from user and not from admin.
+    let license_id = localStorage.getItem("license_id");
     this.http.post<any>('http://127.0.0.1:5000/items/all', { license_id: license_id }).subscribe(result => {
       this.items = result.items;
       this.updatePagination(result);
