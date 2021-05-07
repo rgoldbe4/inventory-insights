@@ -5,6 +5,14 @@
   </div>
 </div>
 
+<div class="row" *ngIf="addedToCart">
+  <div class="col">
+    <div class="alert alert-success">
+      {{ item.name }} was added to your cart!
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-3">
     <img src="assets/cartIcon.PNG" class="img-thumbnail img" />
