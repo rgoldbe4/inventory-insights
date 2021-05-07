@@ -80,7 +80,7 @@ import { RegisterComponent } from './register/register.component';
       {path: 'shop/cart', component: CartComponent},
       {path: 'shop/order', component: OrderComponent},
       {path: 'shop/products', component: ShopProductsComponent},
-      {path: 'shop/products/product/:id', component: ShopProductComponent}
+      {path: 'shop/products/product/:id', component: ShopProductComponent},
     ]),
     FormsModule,
   ],

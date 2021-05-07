@@ -1,82 +1,98 @@
 <app-shop-nav></app-shop-nav>
-<h2 class="text-center">Checkout</h2>
-<table class="table table-hover">
-  <tbody>
-    <tr>
-      <th class="text-center align-middle"><img src="assets/cartIcon.PNG" alt="Product Image" class="logo"></th>
-      <td class="align-middle"><h3> Item Name1 </h3></td>
-      <td class="text-right align-middle"><h3> $9.99 </h3></td>
-    </tr>
-    <tr>
-      <th class="text-center align-middle"><img src="assets/cartIcon.PNG" alt="Product Image" class="logo"></th>
-      <td class="align-middle"><h3> Item Name2</h3></td>
-      <td class="text-right align-middle"><h3> $19.99 </h3></td>
-    </tr>
-    <tr>
-      <th class="text-center align-middle"><img src="assets/cartIcon.PNG" alt="Product Image" class="logo"></th>
-      <td class="align-middle"><h3> Item Name3 </h3></td>
-      <td class="text-right align-middle"><h3> $29.99 </h3></td>
-    </tr>
-    <tr>
-      <th class="text-center align-middle"><img src="assets/cartIcon.PNG" alt="Product Image" class="logo"></th>
-      <td class="align-middle"><h3> Item Name4 </h3></td>
-      <td class="text-right align-middle"><h3> $39.99 </h3></td>
-    </tr>
-    <tr>
-      <th class="text-center align-middle"></th>
-      <td class="align-middle"><h3> Subtotal </h3></td>
-      <td class="text-right align-middle"><h3> $99.96 </h3></td>
-    </tr>
-  </tbody>
-</table><br>
-
 <div class="row">
-  <div class="col-12 text-center">
-    <h3>Customers who bought test product also bought: </h3>
+  <div class="col text-center">
+    <h2>Your Cart</h2>
   </div>
-</div><br>
+</div>
 
+<div class="row" *ngIf="!hasItems">
+  <div class="col">
+    <div class="alert alert-danger">
+      You do not have any items in this cart!
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="hasItems">
+  <div class="col">
+     <table class="table table-hover">
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <th class="text-center align-middle"><img height="50" width="50" src="assets/cartIcon.PNG" alt="Product Image"></th>
+            <td class="align-middle">{{ item.name }}</td>
+            <td class="text-right align-middle">${{ item.price }}</td>
+            <td class="align-middle"><button type="button" class="btn btn-outline-danger" (click)="remove(item)">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
 
-<div class="row">
-  <div class="col-3 text-center">
-    <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
-  </div>
-  <div class="col-3 text-center">
-    <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
-  </div>
-  <div class="col-3 text-center">
-    <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
-  </div>
-  <div class="col-3 text-center"></div>
 </div>
 
 <div class="row">
+  <div class="col">
+    <div class="row">
+      <div class="col text-center">
+        <h3>Customers who bought test product also bought: </h3>
+      </div>
+    </div>
+    <div class="row">
 
-  <div class="col-3 text-center"><br>
-    <button type="button" class="btn btn-outline-success btn-lg">
-      <i class="bi bi-cart-plus"></i>
-      Add to Cart
-    </button>
-  </div>
+      <div class="col-3 text-center">
+        <div class="row">
+          <div class="col">
+            <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
+          </div>
+        </div>
+        <div class="row padding-top">
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-lg">
+              <i class="bi bi-cart-plus"></i>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <div class="col-3 text-center"><br>
-    <button type="button" class="btn btn-outline-success btn-lg">
-      <i class="bi bi-cart-plus"></i>
-      Add to Cart
-    </button>
-  </div>
+      <div class="col-3 text-center">
+        <div class="row">
+          <div class="col">
+            <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
+          </div>
+        </div>
+        <div class="row padding-top">
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-lg">
+              <i class="bi bi-cart-plus"></i>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <div class="col-3 text-center"><br>
-    <button type="button" class="btn btn-outline-success btn-lg">
-      <i class="bi bi-cart-plus"></i>
-      Add to Cart
-    </button>
-  </div>
+      <div class="col-3 text-center">
+        <div class="row">
+          <div class="col">
+            <img src="assets/cartIcon.PNG" alt="Price History Graph" class="logo">
+          </div>
+        </div>
+        <div class="row padding-top">
+          <div class="col">
+            <button type="button" class="btn btn-outline-success btn-lg">
+              <i class="bi bi-cart-plus"></i>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <div class="col-3 align-self-end ">
-    <button type="button" class="btn btn-outline-info btn-lg">
-      <i class="bi bi-credit-card"></i>
-      No thanks, Proceed to checkout
-    </button>
+      <div class="col-md-3 align-self-end">
+        <button type="button" class="btn btn-outline-info btn-lg">
+          <i class="bi bi-credit-card"></i>
+          No thanks, Proceed to checkout
+        </button>
+      </div>
+    </div>
+
   </div>
 </div>
+

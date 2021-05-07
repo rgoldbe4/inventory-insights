@@ -13,6 +13,8 @@ export class ShopProductsComponent implements OnInit {
 
   // All items to display on the page.
   items: any = [];
+  errors: Array<string> = [];
+  successes: Array<string> = [];
 
   // Pagination
   displayedItems: any[] = []; // The items to display on the page.
@@ -44,6 +46,19 @@ export class ShopProductsComponent implements OnInit {
     this.pages = Array(this.maxPages).map((x, i)=>i);
   }
 
+  // When the user clicks 'add to cart' button.
+  addToCart(item: any) {
+    let cartId = localStorage.getItem('cart_id');
+    // Add the item to the cart.
+    this.http.post<any>('http://127.0.0.1:5000/cart/item/add', { item_id: item.id, cart_id: cartId}).subscribe(result => {
+      if (result.success) {
+        this.successes.push(item.name + " was added to your cart.");
+      } else {
+        this.errors.push(item.name + " was not added to your cart. Try again later.");
+      }
+    });
+  }
+
   ngOnInit(): void {
     // Update with license id from user and not from admin.
     let license_id = localStorage.getItem("license_id");
@@ -51,6 +66,14 @@ export class ShopProductsComponent implements OnInit {
       this.items = result.items;
       this.updatePagination(result);
     });
+
+    // Check if a cart is already selected.
+    if (localStorage.getItem('cart_id') == null) {
+      let userId = localStorage.getItem('user_id');
+      this.http.post<any>('http://127.0.0.1:5000/cart/active', {id: userId}).subscribe(result => {
+        localStorage.setItem('cart_id', result.cart.id);
+      });
+    }
   }
 
 }

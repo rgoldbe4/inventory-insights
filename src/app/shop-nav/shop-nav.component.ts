@@ -10,7 +10,9 @@ export class ShopNavComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  user = {};
+  user = { first_name: '', last_name: '',
+    carts: undefined
+  };
 
   ngOnInit(): void {
     // Check if the user is logged in.
