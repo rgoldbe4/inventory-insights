@@ -35,7 +35,7 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {
     // Check if a license is saved, if not, redirect
     if (localStorage.getItem('license_id') == null)
-      window.location.href="shop"
+      window.location.href="shop";
     else {
       let license_id = localStorage.getItem('license_id');
       this.http.post<any>('http://127.0.0.1:5000/license', { id: license_id }).subscribe(result => {

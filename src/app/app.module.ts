@@ -74,7 +74,7 @@ import { ShopProductComponent } from './shop-product/shop-product.component';
       {path: 'user/account', component: UserComponent},
       {path: 'user/login', component: UserLoginComponent},
       {path: 'user/register', component: UserRegisterComponent},
-      {path: 'shop/:id/cart', component: CartComponent},
+      {path: 'shop/cart', component: CartComponent},
       {path: 'shop/order', component: OrderComponent},
       {path: 'shop/products', component: ShopProductsComponent},
       {path: 'shop/products/product/:id', component: ShopProductComponent}
