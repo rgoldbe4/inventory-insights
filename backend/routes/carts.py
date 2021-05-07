@@ -78,5 +78,7 @@ def recommend_items_from_cart():
   session = Session()
   cart = cart_helper.get(session=session, id=cart_id)
   items = recommend.recommendItem(session, cart)
-  return jsonify({'items' : items})
+  serialized_items = [item.to_dict() for item in items]
+  session.close()
+  return jsonify(items=serialized_items)
 
