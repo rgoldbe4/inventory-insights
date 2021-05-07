@@ -10,6 +10,9 @@ def add(session, user, items):
 def get(session, id):
   return session.query(Order).filter_by(id=id).first()
 
+def get_all_by_user(session, user_id):
+  return session.query(Order).filter_by(id=id).all()
+
 def delete(session, id):
   order = get(id)
   if order is not None:
