@@ -4,6 +4,7 @@ from flask.json import dumps
 from backend.models import Item
 from database import *
 from backend.helpers import user_helper, license_helper, cart_helper, item_helper
+from backend import graphs
 
 item_blueprint = Blueprint('item_blueprint', __name__)
 
@@ -82,6 +83,16 @@ def save():
   item = item.to_dict()
   session.close()
   return jsonify({ 'item': item, 'result': True })
+
+  @item_blueprint.route('/items/monthlySales', methods=['POST'])
+  def salesGraph():
+    data = request.json
+    item_id = data['item_id']
+    session = Session()
+    sales = graphs.monthlySales(session, item_id)
+    return jsonify({ 'sales': sales })
+    
+    
 
 
 
