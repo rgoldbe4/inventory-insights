@@ -16,9 +16,9 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Price ($)</th>
-          <th scope="col">Stock</th>
+          <th scope="col" class="text-center">Name</th>
+          <th scope="col" class="text-center">Price ($)</th>
+          <th scope="col" class="text-center">Stock</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -26,9 +26,9 @@
       <ng-container *ngFor="let item of displayedItems">
         <tr>
           <th>{{ item.name }}</th>
-          <td class="text-success">${{ item.price  | number:'1.2-2'}}</td>
-          <td class="text-secondary">{{ item.instock }}</td>
-          <td>
+          <td class="text-success text-center">${{ item.price  | number:'1.2-2'}}</td>
+          <td class="text-secondary text-center">{{ item.instock }}</td>
+          <td class="text-center">
             <div class="btn-group" role="group" aria-label="Options">
               <a class="btn btn-outline-primary" href="shop/products/product/{{item.id}}">
                 <i class="bi bi-card-list"></i> View Details

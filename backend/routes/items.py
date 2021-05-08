@@ -90,9 +90,10 @@ def salesGraph():
   item_id = data['item_id']
   session = Session()
   sales = graphs.monthlySales(session, item_id)
-  print(sales)
   session.close()
   return jsonify({ 'sales': sales })
+
+
 
 
 

@@ -21,7 +21,7 @@ def monthlySales(session, id):
         elif myOrder.date.month == 2:
             feb +=1
         elif myOrder.date.month == 3:
-            mar +=1 
+            mar +=1
         elif myOrder.date.month == 4:
             apr +=1
         elif myOrder.date.month == 5:
@@ -35,10 +35,10 @@ def monthlySales(session, id):
         elif myOrder.date.month == 9:
             sep +=1
         elif myOrder.date.month == 10:
-            oct +=1 
+            oct +=1
         elif myOrder.date.month == 11:
             nov +=1
         elif myOrder.date.month == 12:
             dec +=1
-    
+
     return jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec

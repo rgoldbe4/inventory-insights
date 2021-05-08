@@ -13,6 +13,11 @@
   </div>
 </div>
 
+<div class="row" *ngIf="!hasItems">
+  <div class="col text-right">
+    <a href="shop/products" class="btn btn-outline-primary">Return to Products</a>
+  </div>
+</div>
 <div class="row" *ngIf="hasItems">
   <div class="col">
      <table class="table table-hover">

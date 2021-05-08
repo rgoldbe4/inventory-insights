@@ -15,6 +15,9 @@ def get(session, id):
 def get_all_by_user(session, user_id):
   return session.query(Order).filter_by(id=id).all()
 
+def get_all(session):
+  return session.query(Order).all()
+
 def delete(session, id):
   order = get(id)
   if order is not None:

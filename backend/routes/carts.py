@@ -106,8 +106,9 @@ def checkout():
   session = Session()
   cart = cart_helper.get(session=session, id=cart_id)
   user = user_helper.get(session=session, id=user_id)
-  order = order_helper.add(user=user, items=cart.items)
+  order = order_helper.add(session=session, user=user, items=cart.items)
   # Toggle the cart to be deactive since it is now an order.
+
   cart.active = False
   # Add order to the user.
   user.orders.append(order)
