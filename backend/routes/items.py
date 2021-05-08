@@ -84,15 +84,17 @@ def save():
   session.close()
   return jsonify({ 'item': item, 'result': True })
 
-  @item_blueprint.route('/items/monthlySales', methods=['POST'])
-  def salesGraph():
-    data = request.json
-    item_id = data['item_id']
-    session = Session()
-    sales = graphs.monthlySales(session, item_id)
-    return jsonify({ 'sales': sales })
-    
-    
+@item_blueprint.route('/items/monthlySales', methods=['POST'])
+def salesGraph():
+  data = request.json
+  item_id = data['item_id']
+  session = Session()
+  sales = graphs.monthlySales(session, item_id)
+  print(sales)
+  session.close()
+  return jsonify({ 'sales': sales })
+
+
 
 
 

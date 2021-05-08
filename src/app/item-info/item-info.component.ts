@@ -12,6 +12,7 @@ export class ItemInfoComponent implements OnInit {
 
   id: number;
   item: any = {};
+  sales: Array<number> = [];
 
   // When the user clicks the Save button
   save(): void {
@@ -43,6 +44,13 @@ export class ItemInfoComponent implements OnInit {
           this.item = result.item;
           this.updateItemValues()
       });
+      // Grab graph information from the item.
+      this.http.post<any>('http://127.0.0.1:5000/items/monthlySales', { item_id: this.id }).subscribe(result => {
+        this.sales = result.sales;
+        this.chartDatasets = [
+          { data: this.sales, label: 'Monthly Sales' }
+        ]
+      });
     });
   }
 
@@ -52,5 +60,33 @@ export class ItemInfoComponent implements OnInit {
       this.item.total_cost = this.item.cost * this.item.instock;
       this.item.total_profit = this.item.profit * this.item.instock;
   }
+
+  public chartType: string = 'line';
+
+  public chartDatasets: Array<any> = [
+    { data: this.sales, label: 'Monthly Sales' },
+  ];
+
+  public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                                    'October', 'November', 'December'];
+
+  public chartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(105, 0, 132, .2)',
+      borderColor: 'rgba(200, 99, 132, .7)',
+      borderWidth: 2,
+    },
+    {
+      backgroundColor: 'rgba(0, 137, 132, .2)',
+      borderColor: 'rgba(0, 10, 130, .7)',
+      borderWidth: 2,
+    }
+  ];
+
+  public chartOptions: any = {
+    responsive: true
+  };
+  public chartClicked(e: any): void { }
+  public chartHovered(e: any): void { }
 
 }

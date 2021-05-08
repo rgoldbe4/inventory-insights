@@ -21,11 +21,16 @@
 
 <div class="row">
   <div class="col text-center">
-    <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
-  </div>
-
-  <div class="col-6 text-center">
-    <img src="assets/pricehistory.png" alt="Price History Graph" class="logo">
+    <canvas mdbChart
+        [chartType]="chartType"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
   </div>
 </div>
 
