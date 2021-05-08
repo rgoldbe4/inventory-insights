@@ -1,17 +1,7 @@
 <app-shop-nav></app-shop-nav>
 <div class="row">
   <div class="col text-center">
-    <h2>Products</h2>
-  </div>
-</div>
-<div class = "container">
-  <div class = "row">
-    <div class = "col text-left">
-      <h3>Order ID:</h3>
-    </div>
-    <div class = "col">
-      <h3>Order Date:</h3>
-    </div>
+    <h2>Orders</h2>
   </div>
 </div>
 <ng-container *ngFor="let order of displayedOrders">
@@ -23,7 +13,7 @@
       <p>Date: {{ order.date }}</p>
     </div>
     <div class="col">
-      <p>Total: ${{ order.total }}</p>
+      <p>Total: ${{ order.total | number: '1.2-2' }}</p>
     </div>
   </div>
   <ng-container *ngFor="let item of order.items">
