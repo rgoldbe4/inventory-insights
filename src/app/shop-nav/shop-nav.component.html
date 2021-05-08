@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="shop">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop/order">Orders</a>
+        </li>
+      </ul>
+    </div>
+     <form class="d-flex" *ngIf="user">
+      <div class="padding-right">
+          <a class="btn btn-outline-success" href="shop/cart">
+            <i class="bi bi-cart2"></i>
+            <span class="logout">
+             Cart
+            </span>
+          </a>
+      </div>
+
+
+
+      <div class="padding-right">
+        <a href="user/account" class="btn btn-outline-primary padding-right">
+          <i class="bi bi-person-circle"></i>
+          <span class="administrator">
+            {{ user.last_name.toUpperCase() + ", " + user.first_name.toUpperCase() }}
+          </span>
+        </a>
+      </div>
+      <a href="logout" class="btn btn-outline-danger">
+        <i class="bi bi-person-x"></i>
+        <span class="logout">
+          Logout
+        </span>
+      </a>
+    </form>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-2 text-center">
+    <img src="assets/CustomerIcon.PNG" alt="Inventory Insights" class="logo">
+  </div>
+  <div class="col">
+    <h1 class="display-6 ">
+      Music Store<br />
+    </h1>
+  </div>
+</div>

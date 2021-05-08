@@ -1,0 +1,45 @@
+<app-shop-nav></app-shop-nav>
+<div class="row">
+  <div class="col text-center">
+    <h2>Orders</h2>
+  </div>
+</div>
+<ng-container *ngFor="let order of displayedOrders">
+  <div class="row alert alert-info">
+    <div class="col">
+      <p>ID: {{ order.id }}</p>
+    </div>
+    <div class="col">
+      <p>Date: {{ order.date }}</p>
+    </div>
+    <div class="col">
+      <p>Total: ${{ order.total | number: '1.2-2' }}</p>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of order.items">
+    <div class="row alert alert-light">
+      <div class="col">
+        <p class="text-secondary">Product: {{item.name}}</p>
+      </div>
+      <div class="col">
+        <p class="text-secondary">Price: {{item.price}}</p>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row alert alert-success">
+    <div class="col b text-right">
+      Total: ${{ order.total | number: '1.2-2' }}
+    </div>
+  </div>
+</ng-container>
+<div class="row">
+  <div class="col">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="currentPage > 0"><span class="page-link" (click)="getDisplayedItems(currentPage - 1, currentPage)">Previous</span></li>
+      <li class="page-item" [ngClass]="{ 'active': currentPage == i }" *ngFor="let page of pages; let i = index;">
+        <span class="page-link" (click)="getDisplayedItems(i, i + 1)">{{ i+1 }}</span>
+      </li>
+      <li class="page-item" *ngIf="currentPage < maxPages - 1"><span class="page-link" (click)="getDisplayedItems(currentPage + 1, currentPage + 2)" >Next</span></li>
+    </ul>
+  </div>
+</div>

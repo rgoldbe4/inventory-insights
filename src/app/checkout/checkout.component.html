@@ -1,0 +1,43 @@
+<app-shop-nav></app-shop-nav>
+<div class="row">
+  <div class="col text-center">
+    <h2>Checkout</h2>
+  </div>
+</div>
+
+<div class="row" *ngIf="order">
+  <div class="col">
+    <div class="alert alert-success">
+      Your order has been placed for <em>${{ order.total }}</em>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.category }}</td>
+          <td class="text-success">${{ item.price }}</td>
+        </tr>
+        <tr class="alert alert-success">
+          <td class="text-right b" colspan="2">Total:</td>
+          <td class="b text-success">${{ cart.total | number: '1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row padding-bottom" *ngIf="!order">
+  <div class="col text-right">
+    <button type="button" class="btn btn-outline-primary btn-lg" (click)="placeOrder()">Place Order</button>
+  </div>
+</div>

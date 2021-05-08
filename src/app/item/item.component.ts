@@ -42,7 +42,7 @@ export class ItemComponent implements OnInit {
       this.http.post<any>('http://127.0.0.1:5000/items/item', { id: this.id }).subscribe(result => {
           this.item = result.item;
       });
-    })
+    });
   }
 
 }

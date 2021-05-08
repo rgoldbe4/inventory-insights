@@ -20,6 +20,16 @@ import { LoginComponent } from './login/login.component';
 import { SplashNavComponent } from './splash-nav/splash-nav.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AdminAccountComponent } from './admin-account/admin-account.component';
+import { ShopNavComponent } from './shop-nav/shop-nav.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserComponent } from './user/user.component';
+import { OrderComponent } from './order/order.component';
+import { ShopProductsComponent } from './shop-products/shop-products.component';
+import { ShopProductComponent } from './shop-product/shop-product.component';
+import { RegisterComponent } from './register/register.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -37,22 +47,45 @@ import { AdminAccountComponent } from './admin-account/admin-account.component';
     SplashNavComponent,
     LogoutComponent,
     AdminAccountComponent,
+    ShopNavComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    UserComponent,
+    OrderComponent,
+    ShopProductsComponent,
+    ShopProductComponent,
+    RegisterComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    MDBBootstrapModule.forRoot(),
     RouterModule.forRoot([
+      // Base Paths
       {path: '', component: SplashComponent},
       {path: 'admin', component: AdminComponent},
       {path: 'shop', component: ShopComponent},
+
+      // Administrator Paths
       {path: 'admin/products', component: ProductsComponent},
       {path: 'admin/products/item/edit/:id', component: ItemComponent},
       {path: 'admin/products/item/info/:id', component: ItemInfoComponent},
       {path: 'admin/products/item/add', component: ItemAddComponent},
-      {path: 'shop/cart', component: CartComponent},
       {path: 'admin/login', component: LoginComponent}, // Administrator Login
-      {path: 'logout', component: LogoutComponent},
+      {path: 'logout', component: LogoutComponent}, // Global logout (user and admin)
       {path: 'admin/account', component: AdminAccountComponent},
+      {path: 'admin/register', component: RegisterComponent},
+
+      // Shop Paths
+      {path: 'user/account', component: UserComponent},
+      {path: 'user/login', component: UserLoginComponent},
+      {path: 'user/register', component: UserRegisterComponent},
+      {path: 'shop/cart', component: CartComponent},
+      {path: 'shop/order', component: OrderComponent},
+      {path: 'shop/products', component: ShopProductsComponent},
+      {path: 'shop/products/product/:id', component: ShopProductComponent},
+      {path: 'shop/checkout', component: CheckoutComponent},
     ]),
     FormsModule,
   ],

@@ -2,31 +2,97 @@
 
 
 <div class="row">
-  <div class="col-7 text-right">
-    <h2>Test Item: Info</h2>
+  <div class="col">
+    <div *ngIf="item.discontinued" class="alert alert-danger text-center" role="alert">
+      This product has been Discontinued
+    </div>
   </div>
-  <div class="col-5 text-center">
-    <button type="button" class="btn btn-primary btn-lg">Edit Details</button>
-  </div><br><br><br><br><br>
-
-  <div class="col-6 text-center">
-    <img src="assets/demand.jpg" alt="Anticipated Demand Graph" class="logo">
-  </div>
-  <div class="col-6 text-center">
-    <img src="assets/pricehistory.png" alt="Price History Graph" class="logo">
-  </div><br><br><br><br><br>
-
-  <div class="col-6 text-left">
-    <h4>Current Stock: Stock amount</h4>
-  </div>
-  <div class="col-6 text-right">
-    <h4>Anticipated Demand: Stock amount</h4>
-  </div><br><br><br><br><br>
-
-  <div class="col-6 text-left">
-    <button type="button" class="btn btn-primary btn-lg">Order More</button>
-  </div>
-  <div class="col-6 text-right">
-    <button type="button" class="btn btn-primary btn-lg">Discontinue Product</button>
-  </div><br><br><br><br><br>
 </div>
+<div class="row">
+  <div class="col-md-10 text-center">
+    <h2>Product: {{item.name}}</h2>
+  </div>
+  <div class="col text-right">
+      <a class="btn btn-outline-secondary btn-lg" href="admin/products/item/edit/{{item.id}}">
+        <i class="bi bi-wrench"></i> Edit
+      </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center">
+    <canvas mdbChart
+        [chartType]="chartType"
+        [datasets]="chartDatasets"
+        [labels]="chartLabels"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]="true"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)" class="chart">
+    </canvas>
+  </div>
+</div>
+
+<div class="row lead">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <span class="b">Current Stock:</span> {{ item.instock }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Price:</span> ${{ item.price | number:'1.2-2' }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Cost:</span> ${{ item.cost | number:'1.2-2' }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <span class="b">Profit:</span> ${{ item.profit | number:'1.2-2' }}
+      </div>
+    </div>
+  </div>
+  <div class="col">
+     <div class="row">
+      <div class="col">
+        <span class="b">Anticipated Demand:</span> N/A
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Price:</span> ${{ item.total_price | number:'1.2-2' }}
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Cost:</span> ${{ item.total_cost | number:'1.2-2' }}
+      </div>
+    </div>
+     <div class="row">
+      <div class="col">
+        <span class="b">Total Profit:</span> ${{ item.total_price | number:'1.2-2' }}
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+      <a class="btn btn-outline-primary btn-lg" href="#">
+        <i class="bi bi-card-list"></i> Order More
+      </a>
+  </div>
+  <div class="col">
+      <button type="button" *ngIf="!item.discontinued" (click)="discontinue()" class="btn btn-outline-danger btn-lg float-right">
+        <i class="bi bi-x-circle"></i> Discontinue
+      </button>
+    </div>
+</div>
+

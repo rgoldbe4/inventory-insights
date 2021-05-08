@@ -36,8 +36,8 @@
         <tr *ngIf="!item.discontinued || showDiscontinued">
           <th>{{ item.id }}</th>
           <td>{{ item.name }}</td>
-          <td class="text-success">${{ item.price }}</td>
-          <td class="text-danger">${{ item.cost }}</td>
+          <td class="text-success">${{ item.price  | number:'1.2-2'}}</td>
+          <td class="text-danger">${{ item.cost  | number:'1.2-2'}}</td>
           <td class="lead" *ngIf="showDiscontinued">
             <span class="text-danger" *ngIf="item.discontinued">Yes</span>
             <span *ngIf="!item.discontinued">No</span>

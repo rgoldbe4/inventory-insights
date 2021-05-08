@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col">
+    <h1>{{ license.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h3 class="text-center">Create Account</h3>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <div *ngIf="errors.length > 0" class="alert alert-danger">
+      <span *ngFor="let error of errors">{{ error }}</span><br />
+    </div>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <div class="alert alert-info">
+      All shops powered by Inventory Insights are universal.
+      You can use an account from another shop without having to create a new one.
+    </div>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" name="first_name" [(ngModel)]="user.first_name" id="first_name" placeholder="Enter First Name">
+      </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" name="last_name" [(ngModel)]="user.last_name" id="last_name" aria-describedby="email" placeholder="Enter Last Name">
+      </div>
+    <form>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="user.email" id="email" aria-describedby="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" [(ngModel)]="user.password" class="form-control" name="password" id="password" placeholder="Password">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <button class="btn btn-outline-primary text-right" type="button" (click)="register()"><i class="bi bi-person-plus"></i> Register</button>
+  </div>
+  <div class="col text-right">
+    <a href="user/login" class="btn btn-outline-secondary"><i class="bi bi-arrow-return-left"></i> Return To Login</a>
+  </div>
+
+</div>

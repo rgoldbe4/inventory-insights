@@ -1,8 +1,4 @@
-from flask import Blueprint, render_template, abort, jsonify, request
-from flask.json import dumps
-import sys
-
-from backend.models import Item
+from flask import Blueprint, jsonify, request
 from database import *
 from backend.helpers import administrator_helper, license_helper
 
@@ -11,7 +7,6 @@ administrator_blueprint = Blueprint('administrator_blueprint', __name__)
 
 @administrator_blueprint.route('/admin/login', methods=['POST'])
 def login():
-  sys.setrecursionlimit(1500)
   req = request.json
   email = req['email']
   password = req['encrypted_password']  # Comes encrypted
@@ -39,37 +34,37 @@ def login():
 @administrator_blueprint.route('/admin/register', methods=['POST'])
 def create():
   req = request.json
+  print(req)
+
   first_name = req['first_name']
   last_name = req['last_name']
   email = req['email']
   password = req['password'] # This should come encrypted.
-  license_id = req['license_id']
+  license_id = req['license']
+
 
   # Check if user exists
-  exists = True
   session = Session()
-  admin = administrator_helper.get(session=session, email=email, password=password)
+  admin = administrator_helper.login(session=session, email=email, password=password)
   admin_license = license_helper.get(session=session, id=license_id)
-  message = ""
+  errors = []
 
   if admin is None:
-    exists = False
     # Ensure that they have not used up their license.
-    administrators = administrator_helper.get(session=session, license=admin_license)
+    administrators = administrator_helper.get_by_license(session=session, license=admin_license)
     if admin_license.accounts > len(administrators):
       # Add administrator to database.
       admin = administrator_helper.add(session=session, first_name=first_name, last_name=last_name,
-                                     email=email, password=password, license=admin_license)
-      message = "Success. Administrator was successfully registered."
+                                     email=email, password=password, license=admin_license, owner=False)
     else:
-      message = "This license has no more remaining Administrator accounts left."
+      errors.append("This license has no more remaining Administrator accounts left.")
   else:
-    message = "The administrator already exists. Cannot create duplicates."
+    errors.append("The administrator already exists. Cannot create duplicates.")
 
   admin = admin.to_dict()
   admin_license = admin_license.to_dict()
   session.close()
-  return jsonify({ 'administrator': admin, 'exists': exists, 'message': message, 'license': admin_license })
+  return jsonify({ 'administrator': admin, 'license': admin_license, 'errors': errors })
 
 # Receives a license id and returns all administrators.
 @administrator_blueprint.route('/admin/all', methods=['POST'])
@@ -94,7 +89,28 @@ def get_single_admin():
   # Grab the ID of the administrator
   session = Session() # Creates a session that connects to the database
   admin = administrator_helper.get(session=session, id=admin_id)
-  admin = admin.to_dict() # Serializes the data so it can be converted to JSON
+  if admin is not None:
+    admin = admin.to_dict() # Serializes the data so it can be converted to JSON
 
   # Return the administrator
+  return jsonify({ 'admin': admin })
+
+
+@administrator_blueprint.route('/admin/save', methods=['POST'])
+def save_admin():
+  data = request.json
+  admin_id = data['id']
+  first_name = data['first_name']
+  last_name = data['last_name']
+  email = data['email']
+
+  session = Session()
+  admin = administrator_helper.get(session, admin_id)
+  admin.first_name = first_name
+  admin.last_name = last_name
+  admin.email = email
+
+  session.commit()
+  admin = admin.to_dict()
+  session.close()
   return jsonify({ 'admin': admin })

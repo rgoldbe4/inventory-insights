@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col">
+    <h1>{{ license.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h3 class="text-center">Login</h3>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <div *ngIf="errors.length > 0" class="alert alert-danger">
+      <span *ngFor="let error of errors">{{ error }}</span><br />
+    </div>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <div class="alert alert-info">
+      All shops powered by Inventory Insights are universal.
+      You can use an account from another shop without having to create a new one.
+    </div>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col">
+    <form>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="user.email" id="email" aria-describedby="email" placeholder="Enter email">
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" [(ngModel)]="user.password" class="form-control" name="password" id="password" placeholder="Password">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <button class="btn btn-outline-primary" type="button" (click)="login()"><i class="bi bi-key"></i> Login</button>
+  </div>
+  <div class="col text-right">
+    <a href="user/register" class="btn btn-outline-success"><i class="bi bi-person-plus"></i> Create Account</a>
+  </div>
+</div>

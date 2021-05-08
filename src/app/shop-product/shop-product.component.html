@@ -1,0 +1,59 @@
+<app-shop-nav></app-shop-nav>
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">{{item.name}}</h2>
+  </div>
+</div>
+
+<div class="row" *ngIf="addedToCart">
+  <div class="col">
+    <div class="alert alert-success">
+      {{ item.name }} was added to your cart!
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <img src="assets/cartIcon.PNG" class="img-thumbnail img" />
+  </div>
+  <div class = "col">
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="category">Category: </label>
+      </div>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.category" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="category" name="category">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="price">Sell Price ($): </label>
+      </div>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.price" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="price" name="price">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="instock">Stock: </label>
+      </div>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.instock" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="instock" name="instock">
+    </div>
+
+    <div class="input-group input-group-lg form-group">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="description">Description: </label>
+      </div>
+      <input type="text" class="form-control disabled" [(ngModel)]="item.description" aria-label="Large" readonly aria-describedby="inputGroup-sizing-sm" id="description" name="description">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <button type="button" (click)="addToCart()" class="btn btn-outline-success btn-lg float-right">
+      <i class="bi bi-cart-plus"></i>
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+
