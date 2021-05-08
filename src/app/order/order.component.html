@@ -1,53 +1,47 @@
 <app-shop-nav></app-shop-nav>
-
 <div class="row">
   <div class="col text-center">
     <h2>Products</h2>
   </div>
 </div>
-
-<div class="row">
-    <div class="col">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Order ID</th>
-          <th scope="col">Date</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-      <ng-container *ngFor="let order of orders">
-
-
-        <div id="accordion">
-              <div class="card">
-                <div class="card-header" id="headingOne{{ order.id }}">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne{{ order.id }}">
-                      Collapsible Group Item #1
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseOne{{ order.id }}" class="collapse show" aria-labelledby="headingOne{{ order.id }}" data-parent="#accordion">
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-        <tr>
-          <th>{{ order.id }}</th>
-          <td class="text-success">{{ order.date }}</td>
-        </tr>
-      </ng-container>
-      </tbody>
-    </table>
+<div class = "container">
+  <div class = "row">
+    <div class = "col text-left">
+      <h3>Order ID:</h3>
+    </div>
+    <div class = "col">
+      <h3>Order Date:</h3>
+    </div>
   </div>
 </div>
+<ng-container *ngFor="let order of displayedOrders">
+  <div class="row alert alert-info">
+    <div class="col">
+      <p>ID: {{ order.id }}</p>
+    </div>
+    <div class="col">
+      <p>Date: {{ order.date }}</p>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of order.items">
+    <div class="row alert alert-light">
+      <div class="col">
+        <p class="text-secondary">Product: {{item.name}}</p>
+      </div>
+      <div class="col">
+        <p class="text-secondary">Price: {{item.price}}</p>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
 <div class="row">
-
+  <div class="col">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="currentPage > 0"><span class="page-link" (click)="getDisplayedItems(currentPage - 1, currentPage)">Previous</span></li>
+      <li class="page-item" [ngClass]="{ 'active': currentPage == i }" *ngFor="let page of pages; let i = index;">
+        <span class="page-link" (click)="getDisplayedItems(i, i + 1)">{{ i+1 }}</span>
+      </li>
+      <li class="page-item" *ngIf="currentPage < maxPages - 1"><span class="page-link" (click)="getDisplayedItems(currentPage + 1, currentPage + 2)" >Next</span></li>
+    </ul>
+  </div>
 </div>
-
