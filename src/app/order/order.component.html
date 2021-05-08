@@ -22,6 +22,9 @@
     <div class="col">
       <p>Date: {{ order.date }}</p>
     </div>
+    <div class="col">
+      <p>Total: ${{ order.total }}</p>
+    </div>
   </div>
   <ng-container *ngFor="let item of order.items">
     <div class="row alert alert-light">
@@ -33,6 +36,11 @@
       </div>
     </div>
   </ng-container>
+  <div class="row alert alert-success">
+    <div class="col b text-right">
+      Total: ${{ order.total | number: '1.2-2' }}
+    </div>
+  </div>
 </ng-container>
 <div class="row">
   <div class="col">

@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit {
 
   // Pagination
   displayedOrders: any[] = []; // The items to display on the page.
-  maxOrders: number = 6; // The maximum number of items to display per page.
+  maxOrders: number = 3; // The maximum number of items to display per page.
   numOrders: number = 10; // The number of items in total
   pages: number[] = []; // The number of pages to display, in an array.
   currentPage: number = 0;
@@ -48,6 +48,12 @@ export class OrderComponent implements OnInit {
     let id = localStorage.getItem("user_id");
     this.http.post<any>('http://127.0.0.1:5000/user', { id: id }).subscribe(result => {
       this.orders = result.user.orders;
+      this.orders.forEach((order, index) => {
+        this.orders[index].total = 0;
+        order.items.forEach(item => {
+          this.orders[index].total += item.price;
+        });
+      });
       this.updatePagination(result.user);
     });
   }
