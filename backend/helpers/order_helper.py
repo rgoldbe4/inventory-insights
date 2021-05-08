@@ -1,10 +1,12 @@
 from backend.models import *
 
 def add(session, user, items):
-  order = Order(user=user, items=items)
+  order = Order(items=items)
   session.add(order)
   session.commit()
   session.refresh(order)
+  user.orders.append(order)
+  session.commit()
   return order
 
 def get(session, id):

@@ -1,6 +1,6 @@
 from flask import jsonify, request, Blueprint
 
-from backend.helpers import cart_helper, user_helper, item_helper
+from backend.helpers import cart_helper, user_helper, item_helper, order_helper
 from backend.models import association_order_table
 from backend import recommend
 from database import Session
@@ -82,3 +82,37 @@ def recommend_items_from_cart():
   session.close()
   return jsonify(items=serialized_items)
 
+
+@cart_blueprint.route('/cart/item/recommend/add', methods=['POST'])
+def add_recommended_item_to_cart():
+  data = request.json
+  item_id = data['item_id']
+  cart_id = data['cart_id']
+  session = Session()
+  cart = cart_helper.get(session=session, id=cart_id)
+  item = item_helper.get(session=session, id=item_id)
+  cart.items.append(item)
+  session.commit()
+  cart = cart.to_dict()
+  session.close()
+  return jsonify({ 'cart': cart })
+
+
+@cart_blueprint.route('/cart/checkout', methods=['POST'])
+def checkout():
+  post = request.json
+  cart_id = post['cart_id']
+  user_id = post['user_id']
+  session = Session()
+  cart = cart_helper.get(session=session, id=cart_id)
+  user = user_helper.get(session=session, id=user_id)
+  order = order_helper.add(user=user, items=cart.items)
+  # Toggle the cart to be deactive since it is now an order.
+  cart.active = False
+  # Add order to the user.
+  user.orders.append(order)
+  session.commit()
+  # Send the newly created order.
+  order = order.to_dict()
+  session.close()
+  return jsonify({ 'order': order })

@@ -28,6 +28,8 @@ import { OrderComponent } from './order/order.component';
 import { ShopProductsComponent } from './shop-products/shop-products.component';
 import { ShopProductComponent } from './shop-product/shop-product.component';
 import { RegisterComponent } from './register/register.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -53,10 +55,12 @@ import { RegisterComponent } from './register/register.component';
     ShopProductsComponent,
     ShopProductComponent,
     RegisterComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    MDBBootstrapModule.forRoot(),
     RouterModule.forRoot([
       // Base Paths
       {path: '', component: SplashComponent},
@@ -81,6 +85,7 @@ import { RegisterComponent } from './register/register.component';
       {path: 'shop/order', component: OrderComponent},
       {path: 'shop/products', component: ShopProductsComponent},
       {path: 'shop/products/product/:id', component: ShopProductComponent},
+      {path: 'shop/checkout', component: CheckoutComponent},
     ]),
     FormsModule,
   ],
